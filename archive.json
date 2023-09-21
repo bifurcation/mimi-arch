@@ -1,0 +1,325 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2023-09-21T00:17:58.670208+00:00",
+  "repo": "bifurcation/mimi-arch",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOKDHiF85vaBPy",
+      "title": "Is membership clients or users? Pick one",
+      "url": "https://github.com/bifurcation/mimi-arch/issues/1",
+      "state": "OPEN",
+      "author": "rohan-wire",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "We will tie ourselves in knots if we use the word member and membership to mean both the clients and the users who interact with a room.\r\n\r\nI propose we reserve the term `member` to be for clients. For users, I propose either \"a user in the room\", or a \"participant\" in the room.",
+      "createdAt": "2023-08-28T06:45:43Z",
+      "updatedAt": "2023-08-30T19:14:19Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "rohan-wire",
+          "authorAssociation": "NONE",
+          "body": "The following statement is impossible:\r\n\r\n\"As discussed above, user-level and client-level membership **must be kept in sync**. When a user is added, some set of their clients should be added as well; when a user leaves or is evicted, any clients joined to the room should be removed. The cryptographic constraints of end-to-end security protocols mean that servers cannot perform this synchronization; it is up to clients to keep these two types of state in sync.\"",
+          "createdAt": "2023-08-28T06:57:02Z",
+          "updatedAt": "2023-08-28T06:57:02Z"
+        },
+        {
+          "author": "rohan-wire",
+          "authorAssociation": "NONE",
+          "body": "\"Membership\r\nI do not think we will be able to have sane discussions if membership means:\r\n- a user having permission to join a room,\r\n- a roster showing a user as an active participant of a room, AND\r\n- an MLS client being an MLS member of an MLS group corresponding to that room.\r\n\r\nI have now had literally thousands of confusing conversations conflating different meanings of member. I have felt the pain firsthand. I do not wish that on the MIMI WG.\r\nI propose that member should mean membership in an MLS group only, and that we use another term (for example participant) to refer to a user.\"",
+          "createdAt": "2023-08-28T07:13:28Z",
+          "updatedAt": "2023-08-28T07:13:28Z"
+        },
+        {
+          "author": "bifurcation",
+          "authorAssociation": "OWNER",
+          "body": "/me looks for the \"bikeshed\" tag :)\r\n\r\nPersonally, I think we can have sane discussions if we're clear that user and client memberships are distinct notions.  I think it will usually be clear from context which is meant.  But if you want to propose some different terminology, I'm open to it.",
+          "createdAt": "2023-08-28T14:29:36Z",
+          "updatedAt": "2023-08-28T14:29:36Z"
+        },
+        {
+          "author": "rohan-wire",
+          "authorAssociation": "NONE",
+          "body": "> But if you want to propose some different terminology, I'm open to it.\r\n\r\nI propose that member should mean membership in an MLS group only, and that we use another term (for example participant) to refer to a user.",
+          "createdAt": "2023-08-28T14:53:47Z",
+          "updatedAt": "2023-08-28T14:53:47Z"
+        },
+        {
+          "author": "turt2live",
+          "authorAssociation": "NONE",
+          "body": "> > But if you want to propose some different terminology, I'm open to it.\r\n> \r\n> I propose that member should mean membership in an MLS group only, and that we use another term (for example participant) to refer to a user.\r\n\r\nI'd flip this the other way. Users are members of a room, but participating in the MLS group. They aren't participating in the room in most cases, if we split signaling how Matthew & I are proposing.",
+          "createdAt": "2023-08-28T14:58:24Z",
+          "updatedAt": "2023-08-28T14:58:24Z"
+        },
+        {
+          "author": "rohan-wire",
+          "authorAssociation": "NONE",
+          "body": "> > > But if you want to propose some different terminology, I'm open to it.\r\n> > \r\n> > \r\n> > I propose that member should mean membership in an MLS group only, and that we use another term (for example participant) to refer to a user.\r\n> \r\n> I'd flip this the other way. Users are members of a room, but participating in the MLS group. They aren't participating in the room in most cases, if we split signaling how Matthew & I are proposing.\r\n\r\nMLS is already an RFC and already defines `member` as a client having the keys of an MLS group. Since we are following, I'd prefer we minimize overloading.",
+          "createdAt": "2023-08-28T18:55:04Z",
+          "updatedAt": "2023-08-28T18:55:04Z"
+        },
+        {
+          "author": "bifurcation",
+          "authorAssociation": "OWNER",
+          "body": "MLS's `member` is explicitly about clients.  MLS doesn't know about users.",
+          "createdAt": "2023-08-29T20:48:24Z",
+          "updatedAt": "2023-08-29T20:48:24Z"
+        },
+        {
+          "author": "rohan-wire",
+          "authorAssociation": "NONE",
+          "body": "> MLS's `member` is explicitly about clients. MLS doesn't know about users.\r\n\r\nYes, but having a member of MLS group and member of a room that uses an MLS group meaning two very different things is still very confusing and should be avoided. I have had plenty of these discussions and they were painful. \r\n\r\nFor example:\r\n\"A user which is no longer a member of the room but which briefly has clients which are still members of the corresponding MLS group should be able to receive handshake message, but might not receive application messages. The (MLS) member should still be able to send Proposals but not application messages or Commits. The roster might still distinctively render the non-room member (for example grayed out) in the roster as long as that former member has clients which are still members of the corresponding MLS group\"",
+          "createdAt": "2023-08-30T19:14:19Z",
+          "updatedAt": "2023-08-30T19:14:19Z"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "id": "I_kwDOKDHiF85vaCTH",
+      "title": "Room state simultaneous synch ",
+      "url": "https://github.com/bifurcation/mimi-arch/issues/2",
+      "state": "OPEN",
+      "author": "rohan-wire",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "\"At any given time, all of the clients and servers participating in the room have the same view of the room's state.\"\r\nThat's impossible. What do we actually mean?\r\n\r\n",
+      "createdAt": "2023-08-28T06:48:44Z",
+      "updatedAt": "2023-08-28T14:59:33Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "bifurcation",
+          "authorAssociation": "OWNER",
+          "body": "It may be a little idealistic, but doesn't seem impossible if you allow for some propagation time.  What I mean is basically that when Alice gets added to a room, all of the clients and servers in the room agree that she's in the room.  Likewise, when she gets band, no server will forward a message from her.",
+          "createdAt": "2023-08-28T14:31:39Z",
+          "updatedAt": "2023-08-28T14:31:39Z"
+        },
+        {
+          "author": "rohan-wire",
+          "authorAssociation": "NONE",
+          "body": "Leaving aside for the moment that we don't have a clear idea of what \"she's *in* the room\" means, I think this is still impossible. What we *can* know is if we are in sync with a specific event, epoch, timestamp or hash from the hub.",
+          "createdAt": "2023-08-28T14:59:33Z",
+          "updatedAt": "2023-08-28T14:59:33Z"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOKDHiF85vaEGW",
+      "title": "e2e security state cannot be not \"room state\"",
+      "url": "https://github.com/bifurcation/mimi-arch/issues/3",
+      "state": "CLOSED",
+      "author": "rohan-wire",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "These statements are contradictory (my emphasis):\r\n\r\n\"At any given time, all of the clients **and servers** participating in the room have the same view of the room's state.\"\r\n\r\n\"The state of the room includes a few types of information, most importantly:\r\n\r\n* The end-to-end security state of the room\"\r\n\r\n\"Messages sent within a room are protected by an end-to-end security protocol to ensure that the servers handling messages cannot inspect or tamper with messages.\"\r\n\r\n",
+      "createdAt": "2023-08-28T06:54:16Z",
+      "updatedAt": "2023-08-29T20:46:33Z",
+      "closedAt": "2023-08-29T20:46:33Z",
+      "comments": [
+        {
+          "author": "bifurcation",
+          "authorAssociation": "OWNER",
+          "body": "Note that there is a clarification elsewhere that the servers know the **public aspects** of the E2E state (i.e., the ratchet tree).",
+          "createdAt": "2023-08-28T14:23:33Z",
+          "updatedAt": "2023-08-28T14:23:33Z"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOKDHiF85vaHgs",
+      "title": "\"control protocols\" is not a single cohesive group",
+      "url": "https://github.com/bifurcation/mimi-arch/issues/4",
+      "state": "CLOSED",
+      "author": "rohan-wire",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I don't think it is useful to talk about \"Control Protocols\" as a bucket of things yet. We should be talking the specific things that are listed and then see if there are enough protocol similarities.",
+      "createdAt": "2023-08-28T07:02:57Z",
+      "updatedAt": "2023-08-29T20:46:38Z",
+      "closedAt": "2023-08-29T20:46:38Z",
+      "comments": [
+        {
+          "author": "bifurcation",
+          "authorAssociation": "OWNER",
+          "body": "To be clear, I didn't mean to imply that there were any similarities to these protocols aside from (1) using events / transport to pass information around and (2) manipulating group state.  The point is that servers do two things: Forward messages and maintain room state.  \"Control protocols\" is just a bucket for the latter.",
+          "createdAt": "2023-08-28T14:34:35Z",
+          "updatedAt": "2023-08-28T14:34:35Z"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOKDHiF85vaJjf",
+      "title": "Message forwarding does not discuss fanout",
+      "url": "https://github.com/bifurcation/mimi-arch/issues/5",
+      "state": "OPEN",
+      "author": "rohan-wire",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Several types of messages need to send \"provisionally\" to the hub, which gets to decide if the message is forwarded on to other clients (fanout)",
+      "createdAt": "2023-08-28T07:08:56Z",
+      "updatedAt": "2023-08-28T14:35:31Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "bifurcation",
+          "authorAssociation": "OWNER",
+          "body": "Agreed, the messaging section is a little thin right now (ironically), could use some elaboration.  If you have concrete thoughts, PRs welcome, otherwise I can take a stab in my edit pass before submitting.",
+          "createdAt": "2023-08-28T14:35:31Z",
+          "updatedAt": "2023-08-28T14:35:31Z"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOKDHiF85vaKuJ",
+      "title": "Not all primitives required by MIMI necessarily happen in a room",
+      "url": "https://github.com/bifurcation/mimi-arch/issues/6",
+      "state": "OPEN",
+      "author": "rohan-wire",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "claiming KeyPackages in MLS (similar to prekeys in DoubleRatchet) does not always happen inside a room. It is neither a \"state event\" or a \"message event\".",
+      "createdAt": "2023-08-28T07:12:08Z",
+      "updatedAt": "2023-08-28T15:09:30Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "bifurcation",
+          "authorAssociation": "OWNER",
+          "body": "We discussed in email the idea that all inter-provider traffic, including KP fetches, has to transit the hub.  That seems at least pretty close to KP fetches happening in the context of a room, since the notion of a \"hub\" is only meaningful in the context of a room.\r\n\r\nIn other words, in the context of MIMI, you're only ever going to fetch a KP in order to add someone to a room.",
+          "createdAt": "2023-08-28T14:22:51Z",
+          "updatedAt": "2023-08-28T14:22:51Z"
+        },
+        {
+          "author": "rohan-wire",
+          "authorAssociation": "NONE",
+          "body": "I agree that Consent and KeyPackage needs to transit the Hub. I think we need to be careful that this will eventually be about a room, but the room may never be created if the relevant consent and keys are not obtained. \r\n\r\n",
+          "createdAt": "2023-08-28T15:09:30Z",
+          "updatedAt": "2023-08-28T15:09:30Z"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOKDHiF85vaNAE",
+      "title": "Is an additional primitive needed to add/remove a user added/removed using and MLS Commit?",
+      "url": "https://github.com/bifurcation/mimi-arch/issues/7",
+      "state": "OPEN",
+      "author": "rohan-wire",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "\"Role of Signaling\r\nI see the signaling and the DS as peers. I see Signaling as policy (about and often by users), and the DS and clients as the enforcers and executors of this policy. The DS deals only with clients. I do not see MLS handshake messages as signaling. I see them as a third thing which is related to the e2ee protocol. A signaling message is not going to result in MLS application messages / content format, and there are many signaling actions that will result in no MLS messages at all. Likewise, adding or removing a client when that does not change the roster shouldn't result in a separate signaling event.\"\r\n\r\n\"If Alice is a participant in a room and adds two of Bob's clients (with his consent) to the corresponding MLS group, do I really need a separate signaling event (something other than an MLS Commit)? I don't think we do. I think we might need a signaling message to make Bob *allowed* to join a room, but there are several ways to do this that would result in a signaling event happening at a very different time. Example:\r\n- Alice sends a signaling event requesting consent to add Bob to a room. This could include permission for Bob to join.\r\n- Bob sends a signaling event consenting to be added to the room\r\n- Alice adds Bob's clients via MLS, or one of Bob's clients joins via External Commit\"",
+      "createdAt": "2023-08-28T07:17:09Z",
+      "updatedAt": "2023-08-28T15:05:09Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "bifurcation",
+          "authorAssociation": "OWNER",
+          "body": "The text of your issue here doesn't seem to match the title.  That is, in the title, you seem to think that some MLS actions should have signaling consequences, and in the body, you say they should be separate.\r\n\r\nI think the crux here is the caveat \"adding or removing a client **when that does not change the roster**\".  Why should we special-case certain MLS messages?  Wouldn't it be cleaner to have more complete parallelism?  Have a signaling event that says Bob is now a (user-level) member -- which implies his clients are allowed to join / be added -- followed by an E2EE event that actually joins the clients.\r\n\r\nIn other words, you seem to think that an MLS Commit adding clients for a new user should implicitly change the user-level roster.  I think it would be cleaner to explicitly change the roster (and reject such a commit until then) and then add the clients.\r\n\r\n(Obviously, in practice, these things can be bundled; Alice can send both actions at once.)",
+          "createdAt": "2023-08-28T14:41:33Z",
+          "updatedAt": "2023-08-28T14:41:33Z"
+        },
+        {
+          "author": "rohan-wire",
+          "authorAssociation": "NONE",
+          "body": "> The text of your issue here doesn't seem to match the title. That is, in the title, you seem to think that some MLS actions should have signaling consequences, and in the body, you say they should be separate.\r\n\r\nThe title comes from the second paragraph. I debated omitting the first paragraph.\r\n\r\n> Why should we special-case certain MLS messages? Wouldn't it be cleaner to have more complete parallelism? Have a signaling event that says Bob is now a (user-level) member -- which implies his clients are allowed to join / be added -- followed by an E2EE event that actually joins the clients.\r\n\r\nto avoid pathological race conditions.\r\n\r\n> In other words, you seem to think that an MLS Commit adding clients for a new user should implicitly change the user-level roster. I think it would be cleaner to explicitly change the roster (and reject such a commit until then) and then add the clients.\r\n\r\nyes\r\n \r\n> (Obviously, in practice, these things can be bundled; Alice can send both actions at once.)\r\n\r\nThey cannot, because the MLS messages are going to the clients and any other messages are only going to the provider.\r\n\r\n",
+          "createdAt": "2023-08-28T15:05:09Z",
+          "updatedAt": "2023-08-28T15:05:09Z"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "id": "I_kwDOKDHiF85v1zhx",
+      "title": "Transport does not describe events",
+      "url": "https://github.com/bifurcation/mimi-arch/issues/8",
+      "state": "OPEN",
+      "author": "turt2live",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "https://bifurcation.github.io/mimi-arch/draft-barnes-mimi-arch.html#section-5.1-5\r\n\r\n> The MIMI transport protocol defines this event framework, including its authentication scheme, as well as the mechanics of how events are delivered from one server to another.\r\n\r\nThe signaling protocol defines how rooms actually operate, encompassing the user-level membership control protocol, half of the policy control protocol, and enforcement of that policy. To be effective in its responsibilities, the event schema and framework needs to be specified at a higher level than the transport, ideally within the signaling protocol itself. \r\n\r\nThe transport absolutely needs to consider how to authenticate traffic between servers, but it does not have ownership of the event structure itself. A signaling protocol instead describes what constitutes a legal event under the policy. A transport protocol may however serialize events in a different format than used by signaling.\r\n\r\nIn other words, integrity and authorization of events is not a concern for the transport, but rather signaling. The transport will still need to be aware of what events are and how they work to make its own decisions on. For example, only returning events the requesting server has visibility on.",
+      "createdAt": "2023-08-31T22:07:23Z",
+      "updatedAt": "2023-08-31T22:07:23Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 9,
+      "id": "I_kwDOKDHiF85xlbH-",
+      "title": "\"membership control protocol\" is now presumably \"participation control protocol\"",
+      "url": "https://github.com/bifurcation/mimi-arch/issues/9",
+      "state": "OPEN",
+      "author": "turt2live",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-09-20T19:59:58Z",
+      "updatedAt": "2023-09-20T19:59:58Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": []
+}
