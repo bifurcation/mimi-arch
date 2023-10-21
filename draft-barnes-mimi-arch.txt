@@ -4,8 +4,8 @@
 
 More Instant Messaging Interoperability                     R. L. Barnes
 Internet-Draft                                                     Cisco
-Intended status: Informational                            29 August 2023
-Expires: 1 March 2024
+Intended status: Informational                           21 October 2023
+Expires: 23 April 2024
 
 
    An Architecture for More Instant Messaging Interoperability (MIMI)
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 1 March 2024.
+   This Internet-Draft will expire on 23 April 2024.
 
 Copyright Notice
 
@@ -72,7 +72,7 @@ Table of Contents
    3.  Overall Scope
    4.  Room State
      4.1.  End-to-End Security State
-     4.2.  Membership
+     4.2.  Participation and Membership
      4.3.  Membership Changes
      4.4.  Policy
    5.  Protocols
@@ -127,13 +127,14 @@ Table of Contents
    realized by multiple physical devices).
 
    Messaging interactions are organized around _rooms_.  All messaging
-   interactions take place in the context of a room.  Rooms have
-   associated membership lists (in terms of both users and clients) and
-   policies about things like how the room may be joined and what
-   capabilities each member has.
+   interactions take place in the context of a room.  Rooms have a
+   notion of _user participation_ as well as _client membership_, both
+   tracked as lists.  Rooms additionally have policies about things like
+   how the room may be joined and what capabilities each member/
+   participant has.
 
    The protocol interactions that drive a room unfold among the servers
-   whose users are members of the room.  There is exactly one _hub_
+   whose users are participants in the room.  There is exactly one _hub_
    server for the room, which is in primary control of the room.  All
    other servers are known as _followers_. Follower servers interact
    directly with the hub server.  Interactions between clients occur
@@ -193,20 +194,9 @@ Table of Contents
 
    *  The end-to-end security state of the room
 
-   *  The user-level membership of the room
+   *  The user-level participation state of the room
 
    *  The authorization policy for the room
-
-      NOTE: We use the phrase "membership" for both users and clients.
-      It might be clearer to invent some distinct terminology for these
-      notions.
-
-      NOTE: In the below, we discuss user-level membership as something
-      independent from, and managed separately from, the end-to-end
-      security state of the room.  Another possibility is that the user-
-      level membership could be derived from the client-level
-      membership, in the sense that a user is a member if and only if
-      they have one or more clients joined.
 
 4.1.  End-to-End Security State
 
@@ -227,41 +217,43 @@ Table of Contents
    clients in the room.  The private aspects of the group, such as the
    symmetric encryption keys, are known only to the clients.
 
-4.2.  Membership
+4.2.  Participation and Membership
 
-   The membership of a room is the set of users who are allowed to
-   participate in the room in some way.  The specific list of ways in
-   which a user may participate is defined by authorization policy, as
-   discussed in Section 4.4.
+   For clarity, we use different words to express the inclusion of users
+   and clients in a room.  Users are participants in a room; clients are
+   members of the end-to-end security state of the room.  The specific
+   list of ways in which a user or client may participate is defined by
+   authorization policy, as discussed in Section 4.4.
 
    This is a more coarse-grained notion of membership than the client-
-   level notion.  Ideally, the two are aligned, with each member user
-   having at least one client joined to the end-to-end security state,
-   and each joined client owned by a member user.  A user may be a
-   member of a group without any client belonging to the user being part
-   of the end-to-end security state of the room.  (In such a case, a
-   user will not be able to read or send messages, but may be able to
-   take other actions.  It is up to client implementations how this
-   state is represented) The reverse situation is forbidden; a client
-   belonging to a user may be joined to the end-to-end security state of
-   the room only if its user is a member.
+   level notion.  Ideally, the two are aligned, with each participating
+   user having at least one client joined to the end-to-end security
+   state, and each joined client owned by a participating user.  A user
+   may be a participant of a group without any client belonging to the
+   user being part of the end-to-end security state of the room.  (In
+   such a case, a user will not be able to read or send messages, but
+   may be able to take other actions.  It is up to client
+   implementations how this state is represented) The reverse situation
+   is forbidden; a client belonging to a user may be joined to the end-
+   to-end security state of the room only if its user is a joined
+   participant of the room.
 
 4.3.  Membership Changes
 
-   The membership of a group can change over time, via _add_ and
-   _remove_ operations at both the user level and the client level.
-   These operations are independent at the protocol level: For example,
-   a user may be added to a room before any of its clients are available
-   to join, or a user may begin using a new device (adding the device
-   without changing the user-level membership).
+   The participant list and client membership of a group can change over
+   time, via _add_ and _remove_ operations at both the user level and
+   the client level.  These operations are independent at the protocol
+   level: For example, a user may be added to a room before any of its
+   clients are available to join, or a user may begin using a new device
+   (adding the device without changing the user-level participation).
 
-   As discussed above, user-level and client-level membership must be
-   kept in sync.  When a user is added, some set of their clients should
-   be added as well; when a user leaves or is evicted, any clients
-   joined to the room should be removed.  The cryptographic constraints
-   of end-to-end security protocols mean that servers cannot perform
-   this synchronization; it is up to clients to keep these two types of
-   state in sync.
+   As discussed above, user-level participation and client-level
+   membership must be kept in sync.  When a user is added, some set of
+   their clients should be added as well; when a user leaves or is
+   evicted, any clients joined to the room should be removed.  The
+   cryptographic constraints of end-to-end security protocols mean that
+   servers cannot perform this synchronization; it is up to clients to
+   keep these two types of state in sync.
 
 4.4.  Policy
 
@@ -373,8 +365,8 @@ Table of Contents
    ultimately created by a client, it is also authenticated by the
    client that created it.
 
-   The MIMI transport protocol defines this event framework, including
-   its authentication scheme, as well as the mechanics of how events are
+   The overall MIMI protocol defines this event framework, including its
+   authentication scheme, as well as the mechanics of how events are
    delivered from one server to another.
 
 5.2.  Control Protocols
@@ -390,9 +382,9 @@ Table of Contents
    policy envelope of a room, and allows participants in a room to
    propose changes to the policy within that envelope.
 
-   The *membership control protocol* manages the user-level membership
-   of the room, including the various ways that members might join or
-   leave a room (or be added/removed by other members).
+   The *participation control protocol* manages the user-level
+   membership of the room, including the various ways that members might
+   join or leave a room (or be added/removed by other users).
 
    The *end-to-end security control protocol* manages the end-to-end
    security state of the room.  In addition to distributing messages
