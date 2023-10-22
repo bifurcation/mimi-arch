@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-10-19T00:18:08.468115+00:00",
+  "timestamp": "2023-10-22T00:19:39.004227+00:00",
   "repo": "bifurcation/mimi-arch",
   "labels": [
     {
@@ -55,15 +55,15 @@
       "id": "I_kwDOKDHiF85vaBPy",
       "title": "Is membership clients or users? Pick one",
       "url": "https://github.com/bifurcation/mimi-arch/issues/1",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "rohan-wire",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "We will tie ourselves in knots if we use the word member and membership to mean both the clients and the users who interact with a room.\r\n\r\nI propose we reserve the term `member` to be for clients. For users, I propose either \"a user in the room\", or a \"participant\" in the room.",
       "createdAt": "2023-08-28T06:45:43Z",
-      "updatedAt": "2023-08-30T19:14:19Z",
-      "closedAt": null,
+      "updatedAt": "2023-10-21T20:10:00Z",
+      "closedAt": "2023-10-21T20:10:00Z",
       "comments": [
         {
           "author": "rohan-wire",
@@ -95,7 +95,7 @@
         },
         {
           "author": "turt2live",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "> > But if you want to propose some different terminology, I'm open to it.\r\n> \r\n> I propose that member should mean membership in an MLS group only, and that we use another term (for example participant) to refer to a user.\r\n\r\nI'd flip this the other way. Users are members of a room, but participating in the MLS group. They aren't participating in the room in most cases, if we split signaling how Matthew & I are proposing.",
           "createdAt": "2023-08-28T14:58:24Z",
           "updatedAt": "2023-08-28T14:58:24Z"
@@ -293,15 +293,15 @@
       "id": "I_kwDOKDHiF85v1zhx",
       "title": "Transport does not describe events",
       "url": "https://github.com/bifurcation/mimi-arch/issues/8",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "turt2live",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "https://bifurcation.github.io/mimi-arch/draft-barnes-mimi-arch.html#section-5.1-5\r\n\r\n> The MIMI transport protocol defines this event framework, including its authentication scheme, as well as the mechanics of how events are delivered from one server to another.\r\n\r\nThe signaling protocol defines how rooms actually operate, encompassing the user-level membership control protocol, half of the policy control protocol, and enforcement of that policy. To be effective in its responsibilities, the event schema and framework needs to be specified at a higher level than the transport, ideally within the signaling protocol itself. \r\n\r\nThe transport absolutely needs to consider how to authenticate traffic between servers, but it does not have ownership of the event structure itself. A signaling protocol instead describes what constitutes a legal event under the policy. A transport protocol may however serialize events in a different format than used by signaling.\r\n\r\nIn other words, integrity and authorization of events is not a concern for the transport, but rather signaling. The transport will still need to be aware of what events are and how they work to make its own decisions on. For example, only returning events the requesting server has visibility on.",
       "createdAt": "2023-08-31T22:07:23Z",
-      "updatedAt": "2023-08-31T22:07:23Z",
-      "closedAt": null,
+      "updatedAt": "2023-10-21T20:10:00Z",
+      "closedAt": "2023-10-21T20:10:00Z",
       "comments": []
     },
     {
@@ -309,17 +309,132 @@
       "id": "I_kwDOKDHiF85xlbH-",
       "title": "\"membership control protocol\" is now presumably \"participation control protocol\"",
       "url": "https://github.com/bifurcation/mimi-arch/issues/9",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "turt2live",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2023-09-20T19:59:58Z",
-      "updatedAt": "2023-09-20T19:59:58Z",
-      "closedAt": null,
+      "updatedAt": "2023-10-21T20:10:00Z",
+      "closedAt": "2023-10-21T20:10:00Z",
       "comments": []
     }
   ],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 10,
+      "id": "PR_kwDOKDHiF85dV6d-",
+      "title": "s/member/participant, and other light edits",
+      "url": "https://github.com/bifurcation/mimi-arch/pull/10",
+      "state": "MERGED",
+      "author": "turt2live",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "See commits.\r\n\r\nFixes https://github.com/bifurcation/mimi-arch/issues/8\r\nFixes https://github.com/bifurcation/mimi-arch/issues/9\r\nFixes https://github.com/bifurcation/mimi-arch/issues/1",
+      "createdAt": "2023-10-20T05:08:11Z",
+      "updatedAt": "2023-10-21T20:29:43Z",
+      "baseRepository": "bifurcation/mimi-arch",
+      "baseRefName": "main",
+      "baseRefOid": "e0fc9882469db76c09d8e755983d1b67f66019e6",
+      "headRepository": "turt2live/ietf-fork-mimi-arch",
+      "headRefName": "travis/consolidate",
+      "headRefOid": "66dd9ed49fa6048552d8698daac0287a591313e6",
+      "closedAt": "2023-10-21T20:09:59Z",
+      "mergedAt": "2023-10-21T20:09:59Z",
+      "mergedBy": "bifurcation",
+      "mergeCommit": {
+        "oid": "eb264e6c0a5b514e66f1f232efe31c66b114f9d3"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKDHiF85kr6Um",
+          "commit": {
+            "abbreviatedOid": "04ec58d"
+          },
+          "author": "turt2live",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-20T05:08:44Z",
+          "updatedAt": "2023-10-20T05:08:44Z",
+          "comments": [
+            {
+              "originalPosition": 33,
+              "body": "This is removed because of formed consensus within the design team",
+              "createdAt": "2023-10-20T05:08:44Z",
+              "updatedAt": "2023-10-20T05:08:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKDHiF85kxtWn",
+          "commit": {
+            "abbreviatedOid": "04ec58d"
+          },
+          "author": "bifurcation",
+          "authorAssociation": "OWNER",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2023-10-20T18:57:06Z",
+          "updatedAt": "2023-10-20T19:02:56Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "I would use \"participants in\" vs. \"participants of\".",
+              "createdAt": "2023-10-20T18:57:06Z",
+              "updatedAt": "2023-10-20T19:02:56Z"
+            },
+            {
+              "originalPosition": 49,
+              "body": "The \"while\" here reads ambiguously -- I initially parsed it as meaning that a user is only a participant if they have clients joined.  Suggest the following rewrite:\r\n\r\n```suggestion\r\nFor clarity, we use different words to express the inclusion of users and clients \r\nin a room.  Users are `participants` in a room; clients are `members` of the\r\nend-to-end security state of the room.  The specific\r\n```",
+              "createdAt": "2023-10-20T19:01:08Z",
+              "updatedAt": "2023-10-20T19:02:56Z"
+            },
+            {
+              "originalPosition": 70,
+              "body": "```suggestion\r\nThe participant list and client membership of a group can change over time, via _add_ and _remove_\r\n```",
+              "createdAt": "2023-10-20T19:02:10Z",
+              "updatedAt": "2023-10-20T19:02:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKDHiF85kx0__",
+          "commit": {
+            "abbreviatedOid": "04ec58d"
+          },
+          "author": "turt2live",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-10-20T19:19:56Z",
+          "updatedAt": "2023-10-20T19:19:56Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\r\nare participants in the room.  There is exactly one _hub_ server for the room, which\r\n```",
+              "createdAt": "2023-10-20T19:19:56Z",
+              "updatedAt": "2023-10-20T19:19:56Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKDHiF85kz5J8",
+          "commit": {
+            "abbreviatedOid": "9efd904"
+          },
+          "author": "bifurcation",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-10-21T19:27:46Z",
+          "updatedAt": "2023-10-21T19:27:46Z",
+          "comments": []
+        }
+      ]
+    }
+  ]
 }
