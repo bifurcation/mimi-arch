@@ -4,8 +4,8 @@
 
 More Instant Messaging Interoperability                     R. L. Barnes
 Internet-Draft                                                     Cisco
-Intended status: Informational                           21 October 2023
-Expires: 23 April 2024
+Intended status: Informational                           23 October 2023
+Expires: 25 April 2024
 
 
    An Architecture for More Instant Messaging Interoperability (MIMI)
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 April 2024.
+   This Internet-Draft will expire on 25 April 2024.
 
 Copyright Notice
 
@@ -72,7 +72,7 @@ Table of Contents
    3.  Overall Scope
    4.  Room State
      4.1.  End-to-End Security State
-     4.2.  Participation and Membership
+     4.2.  Participants and Members
      4.3.  Membership Changes
      4.4.  Policy
    5.  Protocols
@@ -82,7 +82,9 @@ Table of Contents
    6.  Actors, Identifiers, and Authentication
    7.  Security Considerations
    8.  IANA Considerations
-   9.  Normative References
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
    Acknowledgments
    Author's Address
 
@@ -116,6 +118,8 @@ Table of Contents
    "OPTIONAL" in this document are to be interpreted as described in
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
+
+   Terms are generally introduced in context, indicated by _emphasis_.
 
 3.  Overall Scope
 
@@ -208,7 +212,7 @@ Table of Contents
    protocol thus represents the precise set of clients that can send and
    receive messages in the room, the most precise notion of membership
    for a room.  A client that has the required keys for end-to-end
-   security is said to be _joined_ to the end-to-end security state of
+   security is said to be a member of the end-to-end security state of
    the room.
 
    The end-to-end security state of a room has public and private
@@ -217,26 +221,34 @@ Table of Contents
    clients in the room.  The private aspects of the group, such as the
    symmetric encryption keys, are known only to the clients.
 
-4.2.  Participation and Membership
+4.2.  Participants and Members
 
-   For clarity, we use different words to express the inclusion of users
-   and clients in a room.  Users are participants in a room; clients are
-   members of the end-to-end security state of the room.  The specific
-   list of ways in which a user or client may participate is defined by
-   authorization policy, as discussed in Section 4.4.
+   The _participant list_ for a room is the set of users who are allowed
+   to interact with the room in some way.  The specific list of ways in
+   which a user may participate is defined by authorization policy, as
+   discussed in Section 4.4.
 
-   This is a more coarse-grained notion of membership than the client-
-   level notion.  Ideally, the two are aligned, with each participating
-   user having at least one client joined to the end-to-end security
-   state, and each joined client owned by a participating user.  A user
-   may be a participant of a group without any client belonging to the
-   user being part of the end-to-end security state of the room.  (In
-   such a case, a user will not be able to read or send messages, but
-   may be able to take other actions.  It is up to client
-   implementations how this state is represented) The reverse situation
-   is forbidden; a client belonging to a user may be joined to the end-
-   to-end security state of the room only if its user is a joined
-   participant of the room.
+   Note the parallel terminology with regard to inclusion of clients or
+   users in the room:
+
+   *  A _client_ is a _member_ of the _end-to-end security state_ of the
+      room
+
+   *  A _user_ is a _participant_ in the room
+
+   The user-level _participant list_ and the client-level _membership_
+   of the room are distinct entities managed by separate protocols, but
+   they must be consistent with each other.  A client may be a member of
+   the E2EE state of a room only if its user is a participant in the
+   room.  However, a user may be a participant in a room without any
+   client belonging to the user being part of the end-to-end security
+   state of the room.  (Such a user will not be able to read or send
+   messages, but may be able to take other actions.  It is up to client
+   implementations how this state is represented.)
+
+   A user with at least one client joined to the end-to-end security
+   state of the room is known as an _active user_, since such a user can
+   fully participate in the room.
 
 4.3.  Membership Changes
 
@@ -421,10 +433,10 @@ Table of Contents
 
 6.  Actors, Identifiers, and Authentication
 
-      NOTE: This section is obsolete.  It should be rewritten to use
-      concepts and terminology from draft-mahy-mimi-identity.
+   There are several types of entity to be identified in the MIMI
+   system, including:
 
-   There are three types of identified actor in the MIMI system:
+   *  Rooms,
 
    *  Servers,
 
@@ -433,24 +445,16 @@ Table of Contents
    *  Clients.
 
    A server's identity is effectively the identity of the provider it
-   represents.  Servers are represented by domain names [RFC1035].  User
-   identities are provider-specific, and thus scoped to a given server
-   identity.  Likewise, a client's identity is within the scope of its
-   user.
-
-      TODO: Define syntax for these identifiers.  Something like:
-
-      -  Server: example.com
-
-      -  User: @user@example.com
-
-      -  Client: %device@user@example.com
+   represents.  A room is hosted by a single hub server at a given time,
+   so its identity is within the scope of the hub server's identity.
 
    To facilitate the application of policies based on these identifiers
    to protocol actions, each actor presents one or more credentials that
    associate a signature key pair to their identifiers.  Protocol
    messages are then signed by their senders to authenticate the origin
    of the message.
+
+   For a deeper discussion of identity, see [I-D.mahy-mimi-identity].
 
 7.  Security Considerations
 
@@ -468,11 +472,9 @@ Table of Contents
 
    This document has no IANA actions.
 
-9.  Normative References
+9.  References
 
-   [RFC1035]  Mockapetris, P., "Domain names - implementation and
-              specification", STD 13, RFC 1035, DOI 10.17487/RFC1035,
-              November 1987, <https://www.rfc-editor.org/rfc/rfc1035>.
+9.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -482,6 +484,15 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+9.2.  Informative References
+
+   [I-D.mahy-mimi-identity]
+              Mahy, R., "More Instant Messaging Interoperability (MIMI)
+              Identity Concepts", Work in Progress, Internet-Draft,
+              draft-mahy-mimi-identity-02, 10 July 2023,
+              <https://datatracker.ietf.org/doc/html/draft-mahy-mimi-
+              identity-02>.
 
 Acknowledgments
 
