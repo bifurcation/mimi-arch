@@ -1253,7 +1253,9 @@ interactions.  Each human <em>user</em> is represented in the system by one or m
 to a single user.  Each provider is represented by a <em>server</em> (logically a
 single server, but possibly realized by multiple physical devices).<a href="#section-3-1" class="pilcrow">¶</a></p>
 <p id="section-3-2">Messaging interactions are organized around <em>rooms</em>.  All messaging interactions
-take place in the context of a room.  Rooms have a notion of
+take place in the context of a room.  (Some non-messaging interactions may take
+place outside of a room, such as operations to fetch information required to set
+up a room.)  Rooms have a notion of
 <em>user participation</em> as well as <em>client membership</em>, both tracked as lists.
 Rooms additionally have policies about things like how the room may be joined
 and what capabilities each member/participant has.<a href="#section-3-2" class="pilcrow">¶</a></p>
@@ -1445,11 +1447,12 @@ clients occur indirectly, via the servers for the clients' providers.<a href="#s
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-room-state" class="section-name selfRef">Room State</a>
       </h2>
 <p id="section-4-1">A room represnts a messaging interaction among a specific set of clients, with a
-single <em>state</em>.  At any given time, all of the clients and servers participating
-in the room have the same view of the room's state.  Changes to the room's state
-can be proposed by either clients or servers, though as dicussed in <a href="#policy" class="auto internal xref">Section 4.4</a>,
-one important aspect of the room's state is an authorization policy that
-determines which actors are allowed to make which changes.<a href="#section-4-1" class="pilcrow">¶</a></p>
+single <em>state</em>.  A major goal of the MIMI protocols is to syncrhonize the state
+of a room across all of the servers and clients participating in the room.
+Changes to the room's state can be proposed by either clients or servers, though
+as dicussed in <a href="#policy" class="auto internal xref">Section 4.4</a>, one important aspect of the room's state is an
+authorization policy that determines which actors are allowed to make which
+changes.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">The creation of a room is a local operation on the hub server, and thus outside
 the scope of MIMI.  The hub server establishes the initial state of the room.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <p id="section-4-3">The state of the room includes a few types of information, most importantly:<a href="#section-4-3" class="pilcrow">¶</a></p>
@@ -1464,6 +1467,135 @@ the scope of MIMI.  The hub server establishes the initial state of the room.<a 
           <p id="section-4-4.3.1">The authorization policy for the room<a href="#section-4-4.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
+<span id="name-elements-of-the-room-state"></span><div id="fig-room-state">
+<figure id="figure-2">
+        <div id="section-4-5.1">
+          <div class="alignLeft art-svg artwork" id="section-4-5.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="384" width="552" viewBox="0 0 552 384" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+              <path d="M 8,32 L 8,368" fill="none" stroke="black"></path>
+              <path d="M 160,32 L 160,120" fill="none" stroke="black"></path>
+              <path d="M 160,136 L 160,184" fill="none" stroke="black"></path>
+              <path d="M 160,200 L 160,312" fill="none" stroke="black"></path>
+              <path d="M 160,328 L 160,368" fill="none" stroke="black"></path>
+              <path d="M 192,32 L 192,120" fill="none" stroke="black"></path>
+              <path d="M 192,136 L 192,184" fill="none" stroke="black"></path>
+              <path d="M 192,200 L 192,312" fill="none" stroke="black"></path>
+              <path d="M 192,328 L 192,368" fill="none" stroke="black"></path>
+              <path d="M 384,32 L 384,120" fill="none" stroke="black"></path>
+              <path d="M 384,136 L 384,184" fill="none" stroke="black"></path>
+              <path d="M 384,200 L 384,368" fill="none" stroke="black"></path>
+              <path d="M 400,192 L 400,256" fill="none" stroke="black"></path>
+              <path d="M 416,32 L 416,120" fill="none" stroke="black"></path>
+              <path d="M 416,136 L 416,184" fill="none" stroke="black"></path>
+              <path d="M 416,200 L 416,248" fill="none" stroke="black"></path>
+              <path d="M 416,264 L 416,368" fill="none" stroke="black"></path>
+              <path d="M 544,32 L 544,368" fill="none" stroke="black"></path>
+              <path d="M 8,32 L 160,32" fill="none" stroke="black"></path>
+              <path d="M 192,32 L 384,32" fill="none" stroke="black"></path>
+              <path d="M 416,32 L 544,32" fill="none" stroke="black"></path>
+              <path d="M 40,112 L 128,112" fill="none" stroke="black"></path>
+              <path d="M 224,112 L 352,112" fill="none" stroke="black"></path>
+              <path d="M 448,112 L 512,112" fill="none" stroke="black"></path>
+              <path d="M 144,128 L 208,128" fill="none" stroke="black"></path>
+              <path d="M 368,128 L 432,128" fill="none" stroke="black"></path>
+              <path d="M 40,144 L 128,144" fill="none" stroke="black"></path>
+              <path d="M 224,144 L 352,144" fill="none" stroke="black"></path>
+              <path d="M 448,144 L 512,144" fill="none" stroke="black"></path>
+              <path d="M 40,176 L 128,176" fill="none" stroke="black"></path>
+              <path d="M 224,176 L 352,176" fill="none" stroke="black"></path>
+              <path d="M 448,176 L 512,176" fill="none" stroke="black"></path>
+              <path d="M 144,192 L 208,192" fill="none" stroke="black"></path>
+              <path d="M 368,192 L 432,192" fill="none" stroke="black"></path>
+              <path d="M 40,208 L 128,208" fill="none" stroke="black"></path>
+              <path d="M 224,208 L 352,208" fill="none" stroke="black"></path>
+              <path d="M 448,208 L 512,208" fill="none" stroke="black"></path>
+              <path d="M 448,240 L 512,240" fill="none" stroke="black"></path>
+              <path d="M 400,256 L 432,256" fill="none" stroke="black"></path>
+              <path d="M 448,272 L 512,272" fill="none" stroke="black"></path>
+              <path d="M 40,304 L 128,304" fill="none" stroke="black"></path>
+              <path d="M 224,304 L 352,304" fill="none" stroke="black"></path>
+              <path d="M 144,320 L 208,320" fill="none" stroke="black"></path>
+              <path d="M 40,336 L 128,336" fill="none" stroke="black"></path>
+              <path d="M 224,336 L 352,336" fill="none" stroke="black"></path>
+              <path d="M 8,368 L 160,368" fill="none" stroke="black"></path>
+              <path d="M 192,368 L 384,368" fill="none" stroke="black"></path>
+              <path d="M 416,368 L 544,368" fill="none" stroke="black"></path>
+              <path d="M 40,112 C 31.16936,112 24,119.16936 24,128" fill="none" stroke="black"></path>
+              <path d="M 128,112 C 136.83064,112 144,119.16936 144,128" fill="none" stroke="black"></path>
+              <path d="M 224,112 C 215.16936,112 208,119.16936 208,128" fill="none" stroke="black"></path>
+              <path d="M 352,112 C 360.83064,112 368,119.16936 368,128" fill="none" stroke="black"></path>
+              <path d="M 448,112 C 439.16936,112 432,119.16936 432,128" fill="none" stroke="black"></path>
+              <path d="M 512,112 C 520.83064,112 528,119.16936 528,128" fill="none" stroke="black"></path>
+              <path d="M 40,144 C 31.16936,144 24,136.83064 24,128" fill="none" stroke="black"></path>
+              <path d="M 128,144 C 136.83064,144 144,136.83064 144,128" fill="none" stroke="black"></path>
+              <path d="M 224,144 C 215.16936,144 208,136.83064 208,128" fill="none" stroke="black"></path>
+              <path d="M 352,144 C 360.83064,144 368,136.83064 368,128" fill="none" stroke="black"></path>
+              <path d="M 448,144 C 439.16936,144 432,136.83064 432,128" fill="none" stroke="black"></path>
+              <path d="M 512,144 C 520.83064,144 528,136.83064 528,128" fill="none" stroke="black"></path>
+              <path d="M 40,176 C 31.16936,176 24,183.16936 24,192" fill="none" stroke="black"></path>
+              <path d="M 128,176 C 136.83064,176 144,183.16936 144,192" fill="none" stroke="black"></path>
+              <path d="M 224,176 C 215.16936,176 208,183.16936 208,192" fill="none" stroke="black"></path>
+              <path d="M 352,176 C 360.83064,176 368,183.16936 368,192" fill="none" stroke="black"></path>
+              <path d="M 448,176 C 439.16936,176 432,183.16936 432,192" fill="none" stroke="black"></path>
+              <path d="M 512,176 C 520.83064,176 528,183.16936 528,192" fill="none" stroke="black"></path>
+              <path d="M 40,208 C 31.16936,208 24,200.83064 24,192" fill="none" stroke="black"></path>
+              <path d="M 128,208 C 136.83064,208 144,200.83064 144,192" fill="none" stroke="black"></path>
+              <path d="M 224,208 C 215.16936,208 208,200.83064 208,192" fill="none" stroke="black"></path>
+              <path d="M 352,208 C 360.83064,208 368,200.83064 368,192" fill="none" stroke="black"></path>
+              <path d="M 448,208 C 439.16936,208 432,200.83064 432,192" fill="none" stroke="black"></path>
+              <path d="M 512,208 C 520.83064,208 528,200.83064 528,192" fill="none" stroke="black"></path>
+              <path d="M 448,240 C 439.16936,240 432,247.16936 432,256" fill="none" stroke="black"></path>
+              <path d="M 512,240 C 520.83064,240 528,247.16936 528,256" fill="none" stroke="black"></path>
+              <path d="M 448,272 C 439.16936,272 432,264.83064 432,256" fill="none" stroke="black"></path>
+              <path d="M 512,272 C 520.83064,272 528,264.83064 528,256" fill="none" stroke="black"></path>
+              <path d="M 40,304 C 31.16936,304 24,311.16936 24,320" fill="none" stroke="black"></path>
+              <path d="M 128,304 C 136.83064,304 144,311.16936 144,320" fill="none" stroke="black"></path>
+              <path d="M 224,304 C 215.16936,304 208,311.16936 208,320" fill="none" stroke="black"></path>
+              <path d="M 352,304 C 360.83064,304 368,311.16936 368,320" fill="none" stroke="black"></path>
+              <path d="M 40,336 C 31.16936,336 24,328.83064 24,320" fill="none" stroke="black"></path>
+              <path d="M 128,336 C 136.83064,336 144,328.83064 144,320" fill="none" stroke="black"></path>
+              <path d="M 224,336 C 215.16936,336 208,328.83064 208,320" fill="none" stroke="black"></path>
+              <path d="M 352,336 C 360.83064,336 368,328.83064 368,320" fill="none" stroke="black"></path>
+              <g class="text">
+                <text x="80" y="68">Authorization</text>
+                <text x="272" y="68">Participant</text>
+                <text x="340" y="68">List</text>
+                <text x="440" y="68">E2E</text>
+                <text x="492" y="68">Security</text>
+                <text x="84" y="84">Policy</text>
+                <text x="480" y="84">State</text>
+                <text x="52" y="132">User</text>
+                <text x="80" y="132">1</text>
+                <text x="112" y="132">Capas</text>
+                <text x="244" y="132">User</text>
+                <text x="272" y="132">1</text>
+                <text x="316" y="132">(active)</text>
+                <text x="468" y="132">Client</text>
+                <text x="508" y="132">1a</text>
+                <text x="52" y="196">User</text>
+                <text x="80" y="196">2</text>
+                <text x="112" y="196">Capas</text>
+                <text x="244" y="196">User</text>
+                <text x="272" y="196">2</text>
+                <text x="316" y="196">(active)</text>
+                <text x="468" y="196">Client</text>
+                <text x="508" y="196">2a</text>
+                <text x="468" y="260">Client</text>
+                <text x="508" y="260">2b</text>
+                <text x="52" y="324">User</text>
+                <text x="80" y="324">2</text>
+                <text x="112" y="324">Capas</text>
+                <text x="236" y="324">User</text>
+                <text x="264" y="324">2</text>
+                <text x="316" y="324">(inactive)</text>
+              </g>
+            </svg><a href="#section-4-5.1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<a href="#name-elements-of-the-room-state" class="selfRef">Elements of the Room State</a>
+        </figcaption></figure>
+</div>
 <div id="end-to-end-security-state">
 <section id="section-4.1">
         <h3 id="name-end-to-end-security-state">
@@ -1590,7 +1722,7 @@ participating clients/servers should also reject the event.<a href="#section-4.4
       <h2 id="name-protocols">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-protocols" class="section-name selfRef">Protocols</a>
       </h2>
-<p id="section-5-1">As shown in <a href="#fig-protocols" class="auto internal xref">Figure 2</a>, MIMI protocols define server-to-server interactions and
+<p id="section-5-1">As shown in <a href="#fig-protocols" class="auto internal xref">Figure 3</a>, MIMI protocols define server-to-server interactions and
 client-to-client interactions.  Each client interacts with the overall system by
 means of its provider's server (whether hub or follower).  Client-to-client
 interactions are done by means of these servers.<a href="#section-5-1" class="pilcrow">¶</a></p>
@@ -1603,7 +1735,7 @@ message forwarding and control protocols leverage a common framework for sharing
 <em>events</em> among servers.<a href="#section-5-2" class="pilcrow">¶</a></p>
 <p id="section-5-3">Note that some parts of the overall system are explicitly out of scope for MIMI.
 Namely, client-server interactions internal to a provider (indicated by
-"(Provider)" in <a href="#fig-protocols" class="auto internal xref">Figure 2</a>) can be arranged however the provider likes.<a href="#section-5-3" class="pilcrow">¶</a></p>
+"(Provider)" in <a href="#fig-protocols" class="auto internal xref">Figure 3</a>) can be arranged however the provider likes.<a href="#section-5-3" class="pilcrow">¶</a></p>
 <p id="section-5-4">A MIMI server thus participates in a few classes of protocols:<a href="#section-5-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5-5.1">
@@ -1617,7 +1749,7 @@ Namely, client-server interactions internal to a provider (indicated by
 </li>
       </ul>
 <span id="name-mimi-protocols"></span><div id="fig-protocols">
-<figure id="figure-2">
+<figure id="figure-3">
         <div id="section-5-6.1">
           <div class="alignLeft art-svg artwork" id="section-5-6.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="320" width="520" viewBox="0 0 520 320" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
@@ -1686,7 +1818,7 @@ Namely, client-server interactions internal to a provider (indicated by
             </svg><a href="#section-5-6.1.1" class="pilcrow">¶</a>
 </div>
 </div>
-<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
+<figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
 <a href="#name-mimi-protocols" class="selfRef">MIMI Protocols</a>
         </figcaption></figure>
 </div>
@@ -1750,8 +1882,8 @@ allows clients to be asynchronously added to rooms.<a href="#section-5.2-4" clas
 the standard MIMI content format.  The end-to-end encapsuation ensures that the
 message content is only accessible to the clients participating in the room, not
 the servers that help to distribute it.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.3-2">The MIMI message format defines how clients achieve the various features of a
-messaging application, for example:<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">The MIMI message format <span>[<a href="#I-D.ietf-mimi-content" class="cite xref">I-D.ietf-mimi-content</a>]</span> defines how clients achieve
+the various features of a messaging application, for example:<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-5.3-3.1">
             <p id="section-5.3-3.1.1">Text messaging<a href="#section-5.3-3.1.1" class="pilcrow">¶</a></p>
@@ -1772,6 +1904,144 @@ messaging application, for example:<a href="#section-5.3-2" class="pilcrow">¶</
 <p id="section-5.3-4">Messages transit MIMI servers by means of a <strong>message forwarding protocol</strong>,
 which carries an opaque, encrypted message payload together with enough metadata
 to facilitate delivery to the clients participating in a room.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
+<span id="name-the-hub-fans-out-messages-t"></span><div id="fig-fanout">
+<figure id="figure-4">
+          <div id="section-5.3-5.1">
+            <div class="alignLeft art-svg artwork" id="section-5.3-5.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="448" width="504" viewBox="0 0 504 448" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                <path d="M 136,64 L 136,88" fill="none" stroke="black"></path>
+                <path d="M 136,104 L 136,128" fill="none" stroke="black"></path>
+                <path d="M 136,208 L 136,232" fill="none" stroke="black"></path>
+                <path d="M 136,248 L 136,272" fill="none" stroke="black"></path>
+                <path d="M 136,352 L 136,376" fill="none" stroke="black"></path>
+                <path d="M 136,392 L 136,416" fill="none" stroke="black"></path>
+                <path d="M 152,80 L 152,112" fill="none" stroke="black"></path>
+                <path d="M 152,224 L 152,256" fill="none" stroke="black"></path>
+                <path d="M 152,368 L 152,400" fill="none" stroke="black"></path>
+                <path d="M 240,80 L 240,112" fill="none" stroke="black"></path>
+                <path d="M 240,224 L 240,256" fill="none" stroke="black"></path>
+                <path d="M 240,368 L 240,400" fill="none" stroke="black"></path>
+                <path d="M 288,80 L 288,112" fill="none" stroke="black"></path>
+                <path d="M 288,224 L 288,256" fill="none" stroke="black"></path>
+                <path d="M 288,368 L 288,400" fill="none" stroke="black"></path>
+                <path d="M 344,120 L 344,216" fill="none" stroke="black"></path>
+                <path d="M 344,264 L 344,360" fill="none" stroke="black"></path>
+                <path d="M 376,112 L 376,216" fill="none" stroke="black"></path>
+                <path d="M 376,256 L 376,360" fill="none" stroke="black"></path>
+                <path d="M 392,80 L 392,112" fill="none" stroke="black"></path>
+                <path d="M 392,224 L 392,256" fill="none" stroke="black"></path>
+                <path d="M 392,368 L 392,400" fill="none" stroke="black"></path>
+                <path d="M 496,64 L 496,416" fill="none" stroke="black"></path>
+                <path d="M 152,48 L 304,48" fill="none" stroke="black"></path>
+                <path d="M 360,48 L 480,48" fill="none" stroke="black"></path>
+                <path d="M 24,80 L 56,80" fill="none" stroke="black"></path>
+                <path d="M 152,80 L 240,80" fill="none" stroke="black"></path>
+                <path d="M 288,80 L 392,80" fill="none" stroke="black"></path>
+                <path d="M 72,96 L 144,96" fill="none" stroke="black"></path>
+                <path d="M 240,96 L 280,96" fill="none" stroke="black"></path>
+                <path d="M 24,112 L 56,112" fill="none" stroke="black"></path>
+                <path d="M 152,112 L 240,112" fill="none" stroke="black"></path>
+                <path d="M 288,112 L 392,112" fill="none" stroke="black"></path>
+                <path d="M 152,144 L 304,144" fill="none" stroke="black"></path>
+                <path d="M 152,192 L 304,192" fill="none" stroke="black"></path>
+                <path d="M 24,224 L 40,224" fill="none" stroke="black"></path>
+                <path d="M 152,224 L 240,224" fill="none" stroke="black"></path>
+                <path d="M 288,224 L 392,224" fill="none" stroke="black"></path>
+                <path d="M 64,240 L 152,240" fill="none" stroke="black"></path>
+                <path d="M 248,240 L 288,240" fill="none" stroke="black"></path>
+                <path d="M 24,256 L 40,256" fill="none" stroke="black"></path>
+                <path d="M 152,256 L 240,256" fill="none" stroke="black"></path>
+                <path d="M 288,256 L 392,256" fill="none" stroke="black"></path>
+                <path d="M 152,288 L 304,288" fill="none" stroke="black"></path>
+                <path d="M 152,336 L 304,336" fill="none" stroke="black"></path>
+                <path d="M 24,368 L 72,368" fill="none" stroke="black"></path>
+                <path d="M 152,368 L 240,368" fill="none" stroke="black"></path>
+                <path d="M 288,368 L 392,368" fill="none" stroke="black"></path>
+                <path d="M 96,384 L 152,384" fill="none" stroke="black"></path>
+                <path d="M 248,384 L 288,384" fill="none" stroke="black"></path>
+                <path d="M 24,400 L 72,400" fill="none" stroke="black"></path>
+                <path d="M 152,400 L 240,400" fill="none" stroke="black"></path>
+                <path d="M 288,400 L 392,400" fill="none" stroke="black"></path>
+                <path d="M 152,432 L 304,432" fill="none" stroke="black"></path>
+                <path d="M 360,432 L 480,432" fill="none" stroke="black"></path>
+                <path d="M 152,48 C 143.16936,48 136,55.16936 136,64" fill="none" stroke="black"></path>
+                <path d="M 304,48 C 312.83064,48 320,55.16936 320,64" fill="none" stroke="black"></path>
+                <path d="M 360,48 C 351.16936,48 344,55.16936 344,64" fill="none" stroke="black"></path>
+                <path d="M 480,48 C 488.83064,48 496,55.16936 496,64" fill="none" stroke="black"></path>
+                <path d="M 24,80 C 15.16936,80 8,87.16936 8,96" fill="none" stroke="black"></path>
+                <path d="M 56,80 C 64.83064,80 72,87.16936 72,96" fill="none" stroke="black"></path>
+                <path d="M 24,112 C 15.16936,112 8,104.83064 8,96" fill="none" stroke="black"></path>
+                <path d="M 56,112 C 64.83064,112 72,104.83064 72,96" fill="none" stroke="black"></path>
+                <path d="M 152,144 C 143.16936,144 136,136.83064 136,128" fill="none" stroke="black"></path>
+                <path d="M 304,144 C 312.83064,144 320,136.83064 320,128" fill="none" stroke="black"></path>
+                <path d="M 152,192 C 143.16936,192 136,199.16936 136,208" fill="none" stroke="black"></path>
+                <path d="M 304,192 C 312.83064,192 320,199.16936 320,208" fill="none" stroke="black"></path>
+                <path d="M 24,224 C 15.16936,224 8,231.16936 8,240" fill="none" stroke="black"></path>
+                <path d="M 40,224 C 48.83064,224 56,231.16936 56,240" fill="none" stroke="black"></path>
+                <path d="M 24,256 C 15.16936,256 8,248.83064 8,240" fill="none" stroke="black"></path>
+                <path d="M 40,256 C 48.83064,256 56,248.83064 56,240" fill="none" stroke="black"></path>
+                <path d="M 152,288 C 143.16936,288 136,280.83064 136,272" fill="none" stroke="black"></path>
+                <path d="M 304,288 C 312.83064,288 320,280.83064 320,272" fill="none" stroke="black"></path>
+                <path d="M 152,336 C 143.16936,336 136,343.16936 136,352" fill="none" stroke="black"></path>
+                <path d="M 304,336 C 312.83064,336 320,343.16936 320,352" fill="none" stroke="black"></path>
+                <path d="M 24,368 C 15.16936,368 8,375.16936 8,384" fill="none" stroke="black"></path>
+                <path d="M 72,368 C 80.83064,368 88,375.16936 88,384" fill="none" stroke="black"></path>
+                <path d="M 24,400 C 15.16936,400 8,392.83064 8,384" fill="none" stroke="black"></path>
+                <path d="M 72,400 C 80.83064,400 88,392.83064 88,384" fill="none" stroke="black"></path>
+                <path d="M 152,432 C 143.16936,432 136,424.83064 136,416" fill="none" stroke="black"></path>
+                <path d="M 304,432 C 312.83064,432 320,424.83064 320,416" fill="none" stroke="black"></path>
+                <path d="M 360,432 C 351.16936,432 344,424.83064 344,416" fill="none" stroke="black"></path>
+                <path d="M 480,432 C 488.83064,432 496,424.83064 496,416" fill="none" stroke="black"></path>
+                <polygon class="arrowhead" points="384,360 372,354.4 372,365.6" fill="black" transform="rotate(90,376,360)"></polygon>
+                <polygon class="arrowhead" points="384,216 372,210.4 372,221.6" fill="black" transform="rotate(90,376,216)"></polygon>
+                <polygon class="arrowhead" points="288,96 276,90.4 276,101.6" fill="black" transform="rotate(0,280,96)"></polygon>
+                <polygon class="arrowhead" points="256,384 244,378.4 244,389.6" fill="black" transform="rotate(180,248,384)"></polygon>
+                <polygon class="arrowhead" points="256,240 244,234.4 244,245.6" fill="black" transform="rotate(180,248,240)"></polygon>
+                <polygon class="arrowhead" points="152,96 140,90.4 140,101.6" fill="black" transform="rotate(0,144,96)"></polygon>
+                <polygon class="arrowhead" points="104,384 92,378.4 92,389.6" fill="black" transform="rotate(180,96,384)"></polygon>
+                <polygon class="arrowhead" points="72,240 60,234.4 60,245.6" fill="black" transform="rotate(180,64,240)"></polygon>
+                <g class="text">
+                  <text x="40" y="36">Users</text>
+                  <text x="188" y="36">Provider</text>
+                  <text x="232" y="36">X</text>
+                  <text x="380" y="36">Room</text>
+                  <text x="416" y="36">123</text>
+                  <text x="40" y="100">Alice</text>
+                  <text x="188" y="100">Client</text>
+                  <text x="224" y="100">A</text>
+                  <text x="332" y="100">Server</text>
+                  <text x="368" y="100">1</text>
+                  <text x="444" y="100">(Follower)</text>
+                  <text x="188" y="180">Provider</text>
+                  <text x="232" y="180">Y</text>
+                  <text x="32" y="244">Bob</text>
+                  <text x="188" y="244">Client</text>
+                  <text x="224" y="244">B</text>
+                  <text x="332" y="244">Server</text>
+                  <text x="368" y="244">2</text>
+                  <text x="424" y="244">(Hub)</text>
+                  <text x="188" y="324">Provider</text>
+                  <text x="232" y="324">Z</text>
+                  <text x="48" y="388">Charlie</text>
+                  <text x="188" y="388">Client</text>
+                  <text x="224" y="388">C</text>
+                  <text x="332" y="388">Server</text>
+                  <text x="368" y="388">3</text>
+                  <text x="444" y="388">(Follower)</text>
+                </g>
+              </svg><a href="#section-5.3-5.1.1" class="pilcrow">¶</a>
+</div>
+</div>
+<figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
+<a href="#name-the-hub-fans-out-messages-t" class="selfRef">The hub fans out messages to participating servers; servers deliver messages to users' clients.</a>
+          </figcaption></figure>
+</div>
+<p id="section-5.3-6">When a client sends a message, the message is delivered to its provider's server
+using some provider-internal mechanism.  If the provider is not the hub, then
+the server forwards the message to the hub for delivery.  In either case, the
+hub distributes the message to all of the servers participating in the room.
+Each provider's server then forwards the message to clients of users who are
+participating in the room.<a href="#section-5.3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1863,6 +2133,10 @@ senders to authenticate the origin of the message.<a href="#section-6-4" class="
 <a href="#section-9.2" class="section-number selfRef">9.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="I-D.ietf-mimi-content">[I-D.ietf-mimi-content]</dt>
+        <dd>
+<span class="refAuthor">Mahy, R.</span>, <span class="refTitle">"More Instant Messaging Interoperability (MIMI) message content"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-mimi-content-00</span>, <time datetime="2023-06-20" class="refDate">20 June 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-mimi-content-00">https://datatracker.ietf.org/doc/html/draft-ietf-mimi-content-00</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="I-D.mahy-mimi-identity">[I-D.mahy-mimi-identity]</dt>
       <dd>
 <span class="refAuthor">Mahy, R.</span>, <span class="refTitle">"More Instant Messaging Interoperability (MIMI) Identity Concepts"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mahy-mimi-identity-02</span>, <time datetime="2023-07-10" class="refDate">10 July 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-mahy-mimi-identity-02">https://datatracker.ietf.org/doc/html/draft-mahy-mimi-identity-02</a>&gt;</span>. </dd>
