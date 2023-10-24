@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-10-22T00:19:39.004227+00:00",
+  "timestamp": "2023-10-24T00:18:18.305828+00:00",
   "repo": "bifurcation/mimi-arch",
   "labels": [
     {
@@ -128,15 +128,15 @@
       "id": "I_kwDOKDHiF85vaCTH",
       "title": "Room state simultaneous synch ",
       "url": "https://github.com/bifurcation/mimi-arch/issues/2",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "rohan-wire",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "\"At any given time, all of the clients and servers participating in the room have the same view of the room's state.\"\r\nThat's impossible. What do we actually mean?\r\n\r\n",
       "createdAt": "2023-08-28T06:48:44Z",
-      "updatedAt": "2023-08-28T14:59:33Z",
-      "closedAt": null,
+      "updatedAt": "2023-10-23T19:34:07Z",
+      "closedAt": "2023-10-23T19:34:07Z",
       "comments": [
         {
           "author": "bifurcation",
@@ -207,15 +207,15 @@
       "id": "I_kwDOKDHiF85vaJjf",
       "title": "Message forwarding does not discuss fanout",
       "url": "https://github.com/bifurcation/mimi-arch/issues/5",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "rohan-wire",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Several types of messages need to send \"provisionally\" to the hub, which gets to decide if the message is forwarded on to other clients (fanout)",
       "createdAt": "2023-08-28T07:08:56Z",
-      "updatedAt": "2023-08-28T14:35:31Z",
-      "closedAt": null,
+      "updatedAt": "2023-10-23T19:34:07Z",
+      "closedAt": "2023-10-23T19:34:07Z",
       "comments": [
         {
           "author": "bifurcation",
@@ -231,15 +231,15 @@
       "id": "I_kwDOKDHiF85vaKuJ",
       "title": "Not all primitives required by MIMI necessarily happen in a room",
       "url": "https://github.com/bifurcation/mimi-arch/issues/6",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "rohan-wire",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "claiming KeyPackages in MLS (similar to prekeys in DoubleRatchet) does not always happen inside a room. It is neither a \"state event\" or a \"message event\".",
       "createdAt": "2023-08-28T07:12:08Z",
-      "updatedAt": "2023-08-28T15:09:30Z",
-      "closedAt": null,
+      "updatedAt": "2023-10-23T19:34:08Z",
+      "closedAt": "2023-10-23T19:34:08Z",
       "comments": [
         {
           "author": "bifurcation",
@@ -262,15 +262,15 @@
       "id": "I_kwDOKDHiF85vaNAE",
       "title": "Is an additional primitive needed to add/remove a user added/removed using and MLS Commit?",
       "url": "https://github.com/bifurcation/mimi-arch/issues/7",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "rohan-wire",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "\"Role of Signaling\r\nI see the signaling and the DS as peers. I see Signaling as policy (about and often by users), and the DS and clients as the enforcers and executors of this policy. The DS deals only with clients. I do not see MLS handshake messages as signaling. I see them as a third thing which is related to the e2ee protocol. A signaling message is not going to result in MLS application messages / content format, and there are many signaling actions that will result in no MLS messages at all. Likewise, adding or removing a client when that does not change the roster shouldn't result in a separate signaling event.\"\r\n\r\n\"If Alice is a participant in a room and adds two of Bob's clients (with his consent) to the corresponding MLS group, do I really need a separate signaling event (something other than an MLS Commit)? I don't think we do. I think we might need a signaling message to make Bob *allowed* to join a room, but there are several ways to do this that would result in a signaling event happening at a very different time. Example:\r\n- Alice sends a signaling event requesting consent to add Bob to a room. This could include permission for Bob to join.\r\n- Bob sends a signaling event consenting to be added to the room\r\n- Alice adds Bob's clients via MLS, or one of Bob's clients joins via External Commit\"",
       "createdAt": "2023-08-28T07:17:09Z",
-      "updatedAt": "2023-08-28T15:05:09Z",
-      "closedAt": null,
+      "updatedAt": "2023-10-23T19:12:46Z",
+      "closedAt": "2023-10-23T19:12:45Z",
       "comments": [
         {
           "author": "bifurcation",
@@ -285,6 +285,13 @@
           "body": "> The text of your issue here doesn't seem to match the title. That is, in the title, you seem to think that some MLS actions should have signaling consequences, and in the body, you say they should be separate.\r\n\r\nThe title comes from the second paragraph. I debated omitting the first paragraph.\r\n\r\n> Why should we special-case certain MLS messages? Wouldn't it be cleaner to have more complete parallelism? Have a signaling event that says Bob is now a (user-level) member -- which implies his clients are allowed to join / be added -- followed by an E2EE event that actually joins the clients.\r\n\r\nto avoid pathological race conditions.\r\n\r\n> In other words, you seem to think that an MLS Commit adding clients for a new user should implicitly change the user-level roster. I think it would be cleaner to explicitly change the roster (and reject such a commit until then) and then add the clients.\r\n\r\nyes\r\n \r\n> (Obviously, in practice, these things can be bundled; Alice can send both actions at once.)\r\n\r\nThey cannot, because the MLS messages are going to the clients and any other messages are only going to the provider.\r\n\r\n",
           "createdAt": "2023-08-28T15:05:09Z",
           "updatedAt": "2023-08-28T15:05:09Z"
+        },
+        {
+          "author": "bifurcation",
+          "authorAssociation": "OWNER",
+          "body": "This has been resolved with further discussion in the design team, and no action is required.",
+          "createdAt": "2023-10-23T19:12:45Z",
+          "updatedAt": "2023-10-23T19:12:45Z"
         }
       ]
     },
@@ -435,6 +442,34 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDOKDHiF85dkZV2",
+      "title": "Updates pre-IETF-118",
+      "url": "https://github.com/bifurcation/mimi-arch/pull/11",
+      "state": "MERGED",
+      "author": "bifurcation",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #2 \r\nFixes #5 \r\nFixes #6",
+      "createdAt": "2023-10-23T19:30:20Z",
+      "updatedAt": "2023-10-23T19:34:06Z",
+      "baseRepository": "bifurcation/mimi-arch",
+      "baseRefName": "main",
+      "baseRefOid": "9edcc0bcec692289a5b25c0c7d1e646e72747cdb",
+      "headRepository": "bifurcation/mimi-arch",
+      "headRefName": "pre-118",
+      "headRefOid": "fc6ef1b4de26f11ea6a1567928eaa01c2fc52cb2",
+      "closedAt": "2023-10-23T19:34:06Z",
+      "mergedAt": "2023-10-23T19:34:06Z",
+      "mergedBy": "bifurcation",
+      "mergeCommit": {
+        "oid": "4f3334251d9fa84baf2cdc426be9abf6000ae631"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
