@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-11-09T00:18:25.513238+00:00",
+  "timestamp": "2023-11-12T00:20:17.390553+00:00",
   "repo": "bifurcation/mimi-arch",
   "labels": [
     {
@@ -325,6 +325,22 @@
       "createdAt": "2023-09-20T19:59:58Z",
       "updatedAt": "2023-10-21T20:10:00Z",
       "closedAt": "2023-10-21T20:10:00Z",
+      "comments": []
+    },
+    {
+      "number": 12,
+      "id": "I_kwDOKDHiF852UxQe",
+      "title": "Incorporate/define glossary of terms",
+      "url": "https://github.com/bifurcation/mimi-arch/issues/12",
+      "state": "OPEN",
+      "author": "turt2live",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "ie: copy/paste https://github.com/turt2live/ietf-mimi-terminology into the doc.\r\n\r\nPer IETF 118",
+      "createdAt": "2023-11-09T09:04:09Z",
+      "updatedAt": "2023-11-09T09:04:09Z",
+      "closedAt": null,
       "comments": []
     }
   ],
