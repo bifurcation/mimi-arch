@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-01-07T00:21:53.647135+00:00",
+  "timestamp": "2024-01-09T00:20:13.262742+00:00",
   "repo": "bifurcation/mimi-arch",
   "labels": [
     {
@@ -484,6 +484,32 @@
       "mergeCommit": {
         "oid": "4f3334251d9fa84baf2cdc426be9abf6000ae631"
       },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOKDHiF85jhFSH",
+      "title": "Populate definitions section with definitions",
+      "url": "https://github.com/bifurcation/mimi-arch/pull/13",
+      "state": "OPEN",
+      "author": "turt2live",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I've brought over the ralston-mimi-terminology definitions where they're used in the architecture document. Everything not already used is deliberately excluded, pending definition in a future document.\r\n\r\nMost definitions are (near-)verbatim, but some are newer. Please feel free to pick at the wording for each.",
+      "createdAt": "2024-01-08T21:03:16Z",
+      "updatedAt": "2024-01-08T21:03:16Z",
+      "baseRepository": "bifurcation/mimi-arch",
+      "baseRefName": "main",
+      "baseRefOid": "4f3334251d9fa84baf2cdc426be9abf6000ae631",
+      "headRepository": "turt2live/ietf-fork-mimi-arch",
+      "headRefName": "travis/terminology",
+      "headRefOid": "8def8c46d86ac0e71df81e05650f7bf824cfdb15",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
       "comments": [],
       "reviews": []
     }
