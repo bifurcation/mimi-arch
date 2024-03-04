@@ -12,25 +12,25 @@ suite of protocols that allow messaging providers to interoperate with one
 another.  This document lays out an overall architecture enumerating the MIMI
 protocols and how they work together to enable an overall messaging experience. 
     " name="description">
-<meta content="xml2rfc 3.18.2" name="generator">
+<meta content="xml2rfc 3.20.0" name="generator">
 <meta content="messaging" name="keyword">
 <meta content="end-to-end security" name="keyword">
 <meta content="draft-barnes-mimi-arch-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.18.2
-    Python 3.11.6
-    ConfigArgParse 1.5.3
+  xml2rfc 3.20.0
+    Python 3.11.8
+    ConfigArgParse 1.7
     google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
     lxml 4.9.3
-    platformdirs 3.11.0
+    platformdirs 4.2.0
     pycountry 22.3.5
-    PyYAML 6.0
+    PyYAML 6.0.1
     requests 2.31.0
-    setuptools 67.7.2
+    setuptools 68.2.2
     six 1.16.0
-    wcwidth 0.2.8
+    wcwidth 0.2.13
 -->
 <link href="draft-barnes-mimi-arch.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1029,11 +1029,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">MIMI Architecture</td>
-<td class="right">October 2023</td>
+<td class="right">March 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Barnes</td>
-<td class="center">Expires 25 April 2024</td>
+<td class="center">Expires 5 September 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1046,12 +1046,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-barnes-mimi-arch-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-10-23" class="published">23 October 2023</time>
+<time datetime="2024-03-04" class="published">4 March 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-04-25">25 April 2024</time></dd>
+<dd class="expires"><time datetime="2024-09-05">5 September 2024</time></dd>
 <dt class="label-authors">Author:</dt>
 <dd class="authors">
 <div class="author">
@@ -1103,7 +1103,7 @@ protocols and how they work together to enable an overall messaging experience.<
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 April 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 5 September 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1112,7 +1112,7 @@ protocols and how they work together to enable an overall messaging experience.<
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2023 IETF Trust and the persons identified as the
+            Copyright (c) 2024 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1159,16 +1159,19 @@ protocols and how they work together to enable an overall messaging experience.<
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-protocols" class="internal xref">Protocols</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-protocol-interactions" class="internal xref">Protocol Interactions</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.1">
-                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-events-and-transport" class="internal xref">Events and Transport</a></p>
+                <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="auto internal xref">5.1</a>.  <a href="#name-end-to-end-security" class="internal xref">End-to-End Security</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.2">
-                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-control-protocols" class="internal xref">Control Protocols</a></p>
+                <p id="section-toc.1-1.5.2.2.1"><a href="#section-5.2" class="auto internal xref">5.2</a>.  <a href="#name-events-and-transport" class="internal xref">Events and Transport</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.3">
-                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-messages" class="internal xref">Messages</a></p>
+                <p id="section-toc.1-1.5.2.3.1"><a href="#section-5.3" class="auto internal xref">5.3</a>.  <a href="#name-room-state-synchronization" class="internal xref">Room State Synchronization</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.4">
+                <p id="section-toc.1-1.5.2.4.1"><a href="#section-5.4" class="auto internal xref">5.4</a>.  <a href="#name-messages" class="internal xref">Messages</a></p>
 </li>
             </ul>
 </li>
@@ -1717,10 +1720,10 @@ participating clients/servers should also reject the event.<a href="#section-4.4
 </div>
 </section>
 </div>
-<div id="protocols">
+<div id="protocol-interactions">
 <section id="section-5">
-      <h2 id="name-protocols">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-protocols" class="section-name selfRef">Protocols</a>
+      <h2 id="name-protocol-interactions">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-protocol-interactions" class="section-name selfRef">Protocol Interactions</a>
       </h2>
 <p id="section-5-1">As shown in <a href="#fig-protocols" class="auto internal xref">Figure 3</a>, MIMI protocols define server-to-server interactions and
 client-to-client interactions.  Each client interacts with the overall system by
@@ -1728,30 +1731,35 @@ means of its provider's server (whether hub or follower).  Client-to-client
 interactions are done by means of these servers.<a href="#section-5-1" class="pilcrow">¶</a></p>
 <p id="section-5-2">The messages sent within a room are forwarded among participating clients by
 servers.  However, messages are protected by an end-to-end security protocol so
-that their content is only accessible to the clients participating in the room.
-In addition to forwarding messages, servers participate in control protocols
+that their content is only accessible to the clients participating in the room.<a href="#section-5-2" class="pilcrow">¶</a></p>
+<p id="section-5-3">In addition to forwarding messages, servers participate in control protocols
 that coordinate the state of the room across the participating providers.  Both
 message forwarding and control protocols leverage a common framework for sharing
-<em>events</em> among servers.<a href="#section-5-2" class="pilcrow">¶</a></p>
-<p id="section-5-3">Note that some parts of the overall system are explicitly out of scope for MIMI.
+<em>events</em> among servers.  Events are protected with the same end-to-end security
+protocol as clients' messages, so that the actors updating a room are
+authenticated and the clients participating in a room can confirm that they
+agree on the state of the room.<a href="#section-5-3" class="pilcrow">¶</a></p>
+<p id="section-5-4">Note that some parts of the overall system are explicitly out of scope for MIMI.
 Namely, client-server interactions internal to a provider (indicated by
-"(Provider)" in <a href="#fig-protocols" class="auto internal xref">Figure 3</a>) can be arranged however the provider likes.<a href="#section-5-3" class="pilcrow">¶</a></p>
-<p id="section-5-4">A MIMI server thus participates in a few classes of protocols:<a href="#section-5-4" class="pilcrow">¶</a></p>
+"(Provider)" in <a href="#fig-protocols" class="auto internal xref">Figure 3</a>) can be arranged however the provider likes.<a href="#section-5-4" class="pilcrow">¶</a></p>
+<p id="section-5-5">The MIMI protocol implemented by servers thus incorporates a few sub-protocols:<a href="#section-5-5" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5-5.1">
-          <p id="section-5-5.1.1">A transport protocol<a href="#section-5-5.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5-6.1">
+          <p id="section-5-6.1.1">A transport protocol for sending room events among servers<a href="#section-5-6.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-5-5.2">
-          <p id="section-5-5.2.1">Control protocols<a href="#section-5-5.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-5-6.2">
+          <p id="section-5-6.2.1">A state synchronization protocol for coordinating updates to the room state<a href="#section-5-6.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-5-5.3">
-          <p id="section-5-5.3.1">A message forwarding protocol<a href="#section-5-5.3.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-5-6.3">
+          <p id="section-5-6.3.1">A message forwarding protocol<a href="#section-5-6.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
+<p id="section-5-7">A common end-to-end security layer provide common security services to all of
+these functions.<a href="#section-5-7" class="pilcrow">¶</a></p>
 <span id="name-mimi-protocols"></span><div id="fig-protocols">
 <figure id="figure-3">
-        <div id="section-5-6.1">
-          <div class="alignLeft art-svg artwork" id="section-5-6.1.1">
+        <div id="section-5-8.1">
+          <div class="alignLeft art-svg artwork" id="section-5-8.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="320" width="520" viewBox="0 0 520 320" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
               <path d="M 24,112 L 24,304" fill="none" stroke="black"></path>
               <path d="M 144,112 L 144,144" fill="none" stroke="black"></path>
@@ -1770,9 +1778,9 @@ Namely, client-server interactions internal to a provider (indicated by
               <path d="M 440,64 L 496,64" fill="none" stroke="black"></path>
               <path d="M 32,158 L 480,158" fill="none" stroke="black"></path>
               <path d="M 32,162 L 480,162" fill="none" stroke="black"></path>
-              <path d="M 32,224 L 136,224" fill="none" stroke="black"></path>
+              <path d="M 32,224 Q 34,220.8 36,224 Q 38,227.2 40,224 Q 42,220.8 44,224 Q 46,227.2 48,224 Q 50,220.8 52,224 Q 54,227.2 56,224 Q 58,220.8 60,224 Q 62,227.2 64,224 Q 66,220.8 68,224 Q 70,227.2 72,224 Q 74,220.8 76,224 Q 78,227.2 80,224 Q 82,220.8 84,224 Q 86,227.2 88,224 Q 90,220.8 92,224 Q 94,227.2 96,224 Q 98,220.8 100,224 Q 102,227.2 104,224 Q 106,220.8 108,224 Q 110,227.2 112,224 Q 114,220.8 116,224 Q 118,227.2 120,224 Q 122,220.8 124,224 Q 126,227.2 128,224 Q 130,220.8 132,224 Q 134,227.2 136,224" fill="none" stroke="black"></path>
               <path d="M 152,224 L 360,224" fill="none" stroke="black"></path>
-              <path d="M 376,224 L 480,224" fill="none" stroke="black"></path>
+              <path d="M 376,224 Q 378,220.8 380,224 Q 382,227.2 384,224 Q 386,220.8 388,224 Q 390,227.2 392,224 Q 394,220.8 396,224 Q 398,227.2 400,224 Q 402,220.8 404,224 Q 406,227.2 408,224 Q 410,220.8 412,224 Q 414,227.2 416,224 Q 418,220.8 420,224 Q 422,227.2 424,224 Q 426,220.8 428,224 Q 430,227.2 432,224 Q 434,220.8 436,224 Q 438,227.2 440,224 Q 442,220.8 444,224 Q 446,227.2 448,224 Q 450,220.8 452,224 Q 454,227.2 456,224 Q 458,220.8 460,224 Q 462,227.2 464,224 Q 466,220.8 468,224 Q 470,227.2 472,224 Q 474,220.8 476,224 Q 478,227.2 480,224" fill="none" stroke="black"></path>
               <path d="M 152,288 L 248,288" fill="none" stroke="black"></path>
               <path d="M 264,288 L 360,288" fill="none" stroke="black"></path>
               <path d="M 24,64 C 15.16936,64 8,71.16936 8,80" fill="none" stroke="black"></path>
@@ -1815,99 +1823,132 @@ Namely, client-server interactions internal to a provider (indicated by
                 <text x="200" y="276">Transport</text>
                 <text x="312" y="276">Transport</text>
               </g>
-            </svg><a href="#section-5-6.1.1" class="pilcrow">¶</a>
+            </svg><a href="#section-5-8.1.1" class="pilcrow">¶</a>
 </div>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
 <a href="#name-mimi-protocols" class="selfRef">MIMI Protocols</a>
         </figcaption></figure>
 </div>
-<div id="events-and-transport">
+<div id="end-to-end-security">
 <section id="section-5.1">
-        <h3 id="name-events-and-transport">
-<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-events-and-transport" class="section-name selfRef">Events and Transport</a>
+        <h3 id="name-end-to-end-security">
+<a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-end-to-end-security" class="section-name selfRef">End-to-End Security</a>
         </h3>
-<p id="section-5.1-1">A room's activities are realized by servers exchanging <em>events</em>.  Events come in
-two types:<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-1">As noted above, all of the clients participating in a room are part of the same
+end-to-end security context.  This allows them to encrypt and integrity-protect
+their messages so that they are secure from inspection or tampering as they
+transit MIMI servers.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">In addition to the message protection noted above, the end-to-end security layer
+of the protocol provides a few additional functions to the remainder of the
+protocol:<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5.1-2.1">
-            <p id="section-5.1-2.1.1"><strong>State events</strong>, which make changes to the room state<a href="#section-5.1-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.1-3.1">
+            <p id="section-5.1-3.1.1">Authentication of the actors making changes to a room<a href="#section-5.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-5.1-2.2">
-            <p id="section-5.1-2.2.1"><strong>Message events</strong>, which describe actual messaging activity in the room<a href="#section-5.1-2.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.1-3.2">
+            <p id="section-5.1-3.2.1">Confirmation that the clients in a room agree on the state of the room<a href="#section-5.1-3.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-5.1-3">Each event originates at one of the servers participating in the room (possibly
-as a result of some interaction with a client).  The originating server sends
-the event to the hub server for the room, who distributes it to the other follower
-servers.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
-<p id="section-5.1-4">Each event is authenticated by its originating server so that all other
-participating servers can verify its origin, even those to whom the event has
-been distributed by the hub.  If an event was ultimately created by a client, it
-is also authenticated by the client that created it.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
-<p id="section-5.1-5">The overall MIMI protocol defines this event framework, including its
-authentication scheme, as well as the mechanics of how events are delivered from
-one server to another.<a href="#section-5.1-5" class="pilcrow">¶</a></p>
+<p id="section-5.1-4">The authentication function allows MIMI servers to verify the identity of a
+client making a change to the room, as an input to a policy evaluation to check
+whether the change is authorized.  MIMI servers can make changes to a room,
+within the bounds of the room's authorization policy.  Thus, MIMI servers also
+need to be represented in the end-to-end security state of the room, but as
+actors who can only authenticate, and are not given access to confidential
+end-to-end security state.  In MLS terms, they are added as external senders,
+not as members of the group.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
+<p id="section-5.1-5">The MIMI protocol includes end-to-end security components to keep the end-to-end
+security state of the room aligned with the room's participant list, and to
+ensure that all clients participating in the room have the proper configuration
+(e.g., trusting the appropriate set of servers).<a href="#section-5.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="control-protocols">
+<div id="events-and-transport">
 <section id="section-5.2">
-        <h3 id="name-control-protocols">
-<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-control-protocols" class="section-name selfRef">Control Protocols</a>
+        <h3 id="name-events-and-transport">
+<a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-events-and-transport" class="section-name selfRef">Events and Transport</a>
         </h3>
-<p id="section-5.2-1">The servers involved in a room use control protocols to perform actions related
-to different types of information that comprise a room's state, particularly
-those listed in <a href="#room-state" class="auto internal xref">Section 4</a>.  Because these types of information and the
-operations they require are largely orthogonal, it makes sense to have a
-separate control protocol for each type of information.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
-<p id="section-5.2-2">The <strong>policy control protocol</strong> distributes information about the policy
+<p id="section-5.2-1">A room's activities are realized by servers exchanging <em>events</em>.  Events come in
+two types:<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5.2-2.1">
+            <p id="section-5.2-2.1.1"><strong>State events</strong>, which make changes to the room state<a href="#section-5.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-5.2-2.2">
+            <p id="section-5.2-2.2.1"><strong>Message events</strong>, which describe actual messaging activity in the room<a href="#section-5.2-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<p id="section-5.2-3">Each event originates at one of the servers participating in the room (possibly
+as a result of some interaction with a client).  The originating server sends
+the event to the hub server for the room, who distributes it to the other follower
+servers.<a href="#section-5.2-3" class="pilcrow">¶</a></p>
+<p id="section-5.2-4">Each event is authenticated by its originating server so that all other
+participating servers can verify its origin, even those to whom the event has
+been distributed by the hub.  If an event was ultimately created by a client, it
+is also authenticated by the client that created it.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
+<p id="section-5.2-5">The overall MIMI protocol defines this event framework, including its
+authentication scheme, as well as the mechanics of how events are delivered from
+one server to another.<a href="#section-5.2-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="room-state-synchronization">
+<section id="section-5.3">
+        <h3 id="name-room-state-synchronization">
+<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-room-state-synchronization" class="section-name selfRef">Room State Synchronization</a>
+        </h3>
+<p id="section-5.3-1">The servers involved in a room use an application state synchronization protocol
+to coordinate changes to a room's state, particularly those listed in
+<a href="#room-state" class="auto internal xref">Section 4</a>.  A few types of room state are synchronized, in what can be
+viewed as independent control sub-protocols:<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-2">A <strong>policy control protocol</strong> distributes information about the policy
 envelope of a room, and allows participants in a room to propose changes to the
-policy within that envelope.<a href="#section-5.2-2" class="pilcrow">¶</a></p>
-<p id="section-5.2-3">The <strong>participation control protocol</strong> manages the user-level membership of the
+policy within that envelope.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+<p id="section-5.3-3">A <strong>participation control protocol</strong> manages the user-level membership of the
 room, including the various ways that members might join or leave a room (or be
-added/removed by other users).<a href="#section-5.2-3" class="pilcrow">¶</a></p>
-<p id="section-5.2-4">The <strong>end-to-end security control protocol</strong> manages the end-to-end security
-state of the room.  In addition to distributing messages that add or remove
-clients from the end-to-end security state, this protocol also allows servers
-to distribute cryptographic information that clients have pre-registered, which
-allows clients to be asynchronously added to rooms.<a href="#section-5.2-4" class="pilcrow">¶</a></p>
+added/removed by other users).<a href="#section-5.3-3" class="pilcrow">¶</a></p>
+<p id="section-5.3-4">As discussed above, the <strong>end-to-end security control protocol</strong> manages the
+end-to-end security state of the room.  In addition to distributing messages
+that add or remove clients from the end-to-end security state, this protocol
+also allows servers to distribute cryptographic information that clients have
+pre-registered, which allows clients to be asynchronously added to rooms.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="messages">
-<section id="section-5.3">
+<section id="section-5.4">
         <h3 id="name-messages">
-<a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-messages" class="section-name selfRef">Messages</a>
+<a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-messages" class="section-name selfRef">Messages</a>
         </h3>
-<p id="section-5.3-1">Mesage events are end-to-end secure objects that carry application messages in
+<p id="section-5.4-1">Mesage events are end-to-end secure objects that carry application messages in
 the standard MIMI content format.  The end-to-end encapsuation ensures that the
 message content is only accessible to the clients participating in the room, not
-the servers that help to distribute it.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
-<p id="section-5.3-2">The MIMI message format <span>[<a href="#I-D.ietf-mimi-content" class="cite xref">I-D.ietf-mimi-content</a>]</span> defines how clients achieve
-the various features of a messaging application, for example:<a href="#section-5.3-2" class="pilcrow">¶</a></p>
+the servers that help to distribute it.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
+<p id="section-5.4-2">The MIMI message format <span>[<a href="#I-D.ietf-mimi-content" class="cite xref">I-D.ietf-mimi-content</a>]</span> defines how clients achieve
+the various features of a messaging application, for example:<a href="#section-5.4-2" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-5.3-3.1">
-            <p id="section-5.3-3.1.1">Text messaging<a href="#section-5.3-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-5.4-3.1">
+            <p id="section-5.4-3.1.1">Text messaging<a href="#section-5.4-3.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-5.3-3.2">
-            <p id="section-5.3-3.2.1">File attachements<a href="#section-5.3-3.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.4-3.2">
+            <p id="section-5.4-3.2.1">File attachements<a href="#section-5.4-3.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-5.3-3.3">
-            <p id="section-5.3-3.3.1">Replies<a href="#section-5.3-3.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.4-3.3">
+            <p id="section-5.4-3.3.1">Replies<a href="#section-5.4-3.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-5.3-3.4">
-            <p id="section-5.3-3.4.1">Reactions<a href="#section-5.3-3.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.4-3.4">
+            <p id="section-5.4-3.4.1">Reactions<a href="#section-5.4-3.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-5.3-3.5">
-            <p id="section-5.3-3.5.1">Initiation of real-time sessions<a href="#section-5.3-3.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-5.4-3.5">
+            <p id="section-5.4-3.5.1">Initiation of real-time sessions<a href="#section-5.4-3.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-5.3-4">Messages transit MIMI servers by means of a <strong>message forwarding protocol</strong>,
+<p id="section-5.4-4">Messages transit MIMI servers by means of a <strong>message forwarding protocol</strong>,
 which carries an opaque, encrypted message payload together with enough metadata
-to facilitate delivery to the clients participating in a room.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
+to facilitate delivery to the clients participating in a room.<a href="#section-5.4-4" class="pilcrow">¶</a></p>
 <span id="name-the-hub-fans-out-messages-t"></span><div id="fig-fanout">
 <figure id="figure-4">
-          <div id="section-5.3-5.1">
-            <div class="alignLeft art-svg artwork" id="section-5.3-5.1.1">
+          <div id="section-5.4-5.1">
+            <div class="alignLeft art-svg artwork" id="section-5.4-5.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="448" width="504" viewBox="0 0 504 448" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
                 <path d="M 136,64 L 136,88" fill="none" stroke="black"></path>
                 <path d="M 136,104 L 136,128" fill="none" stroke="black"></path>
@@ -2029,19 +2070,19 @@ to facilitate delivery to the clients participating in a room.<a href="#section-
                   <text x="368" y="388">3</text>
                   <text x="444" y="388">(Follower)</text>
                 </g>
-              </svg><a href="#section-5.3-5.1.1" class="pilcrow">¶</a>
+              </svg><a href="#section-5.4-5.1.1" class="pilcrow">¶</a>
 </div>
 </div>
 <figcaption><a href="#figure-4" class="selfRef">Figure 4</a>:
 <a href="#name-the-hub-fans-out-messages-t" class="selfRef">The hub fans out messages to participating servers; servers deliver messages to users' clients.</a>
           </figcaption></figure>
 </div>
-<p id="section-5.3-6">When a client sends a message, the message is delivered to its provider's server
+<p id="section-5.4-6">When a client sends a message, the message is delivered to its provider's server
 using some provider-internal mechanism.  If the provider is not the hub, then
 the server forwards the message to the hub for delivery.  In either case, the
 hub distributes the message to all of the servers participating in the room.
 Each provider's server then forwards the message to clients of users who are
-participating in the room.<a href="#section-5.3-6" class="pilcrow">¶</a></p>
+participating in the room.<a href="#section-5.4-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2135,7 +2176,7 @@ senders to authenticate the origin of the message.<a href="#section-6-4" class="
 <dl class="references">
 <dt id="I-D.ietf-mimi-content">[I-D.ietf-mimi-content]</dt>
         <dd>
-<span class="refAuthor">Mahy, R.</span>, <span class="refTitle">"More Instant Messaging Interoperability (MIMI) message content"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-mimi-content-00</span>, <time datetime="2023-06-20" class="refDate">20 June 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-mimi-content-00">https://datatracker.ietf.org/doc/html/draft-ietf-mimi-content-00</a>&gt;</span>. </dd>
+<span class="refAuthor">Mahy, R.</span>, <span class="refTitle">"More Instant Messaging Interoperability (MIMI) message content"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-mimi-content-01</span>, <time datetime="2023-10-23" class="refDate">23 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-mimi-content-01">https://datatracker.ietf.org/doc/html/draft-ietf-mimi-content-01</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.mahy-mimi-identity">[I-D.mahy-mimi-identity]</dt>
       <dd>
