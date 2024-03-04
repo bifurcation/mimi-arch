@@ -120,7 +120,94 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-   Terms are generally introduced in context, indicated by _emphasis_.
+   The following terms are used by this document and the MIMI working
+   group for a shared understanding of the overall system:
+
+   _Messaging Provider_ or _Provider_: A service offering instant
+   messaging to users.  Each provider has a logical server to route
+   events between users (or clients, more specifically).
+
+   _User_: A (normally) human operator of a client.  Users have a
+   distinct _User ID_ to canonically identify them.
+
+   _Client_: A user interface for messaging, performing encryption as
+   needed.  Presents chats to the user to interact with.  Synonymous
+   with _MLS Client_. Clients have a _Client ID_ to canonically
+   represent them among the user's other clients.  Clients MAY also be
+   called _Devices_ to differentiate them from a named application.
+
+   _Server_: A logical location operated by a messaging provider which
+   ensures message and information delivery.  A server may be realized
+   by multiple physical computers.  Servers own users which belong to
+   them.  Servers are considered to be "participating" in a room if they
+   have at least one joined user participant.
+
+   _Hub_: The specific server in a room with operational responsibility
+   for delivery between all servers in the room.  This includes messages
+   and, where applicable, information about the room or underlying
+   cryptographic state.
+
+   _Follower_: All non-hub servers in a room.  Followers are required to
+   interact with the hub server to send messages, and are responsible
+   for "last mile" delivery of a message to its local users.
+
+   _Room_: The virtual space where users communicate.  This is
+   semantically different from an _MLS Group_: an MLS Group is
+   responsible for handling client keys while a room is simply the user-
+   facing construct for communications.  Rooms have a cryptographic
+   state component as well.  MLS uses a Group to represent that state.
+   Rooms have a _Room ID_ to canonically identify them.  Rooms may
+   additionally be called _Chats_, _Conversations_, or _Channels_.
+
+   _State_: The room's user participation information, cryptographic
+   state, and other metadata as required, collectively.
+
+   _User Participation_: The set of users which can engage in
+   conversation within a given room, or could engage if they complete
+   further actions.  For example, users may be "invited" to converse,
+   and can accept (join) or reject (leave).  Users are not considered to
+   have "membership".  Instead, users are _participants_ in the room.  A
+   list of these users is called the _Participant List_.
+
+   _Client Membership_: The set of clients belonging to participating
+   users within a given room's cryptographic state.  Clients are not
+   considered to have "participation".  Instead, clients are _members_
+   of the room.  A list of these clients is called the _Membership_ for
+   a room.
+
+   _Active Participant_: A participating user with at least one client
+   member in the room's cryptographic state.
+
+   _Inactive Participant_: A participating user with zero client members
+   in the room's cryptographic state.  Users in this state may be unable
+   to decrypt messages sent while no clients are members.
+
+   _Add_ (Operation): Places a client or user into a joined state, able
+   to converse with other clients/users also in the joined state.  When
+   adding a user, all of their clients are implicitly added as well.
+
+   _Remove_ (Operation): Kicks a client or user from a room, preventing
+   further conversation being received from that entity, and preventing
+   that entity from seeing future conversation.  When a user is removed,
+   all of their clients are explicitly removed as well.  Removal may be
+   voluntary or non-voluntary.
+
+   _Policy_: The authorization structure within a room.  Policy governs
+   whether an action is possible, such as whether User A can add User B
+   to the room.  Policies are changed over time by users and servers.
+
+   _Policy Envelope_: Set by the hub server during room creation, the
+   set of policies which can be changed in the room.
+
+   _Event_: A structure used by servers to relay changes to the room and
+   messages from clients.
+
+   _State Event_: An event which mutates the _state_ of the room.  These
+   may partially be visible to the servers of the room for
+   authentication and authorization.
+
+   _Message Event_: An event containing a message from a client.
+   Contents are not visible to servers in the room.
 
 3.  Overall Scope
 
