@@ -1836,9 +1836,8 @@ these functions.<a href="#section-5-7" class="pilcrow">¶</a></p>
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-end-to-end-security" class="section-name selfRef">End-to-End Security</a>
         </h3>
 <p id="section-5.1-1">As noted above, all of the clients participating in a room are part of the same
-end-to-end security context.  This allows them to encrypt and integrity-protect
-their messages so that they are secure from inspection or tampering as they
-transit MIMI servers.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+end-to-end security context.  This allows them to protect their messages so that
+they are secure from inspection or tampering as they transit MIMI servers.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
 <p id="section-5.1-2">In addition to the message protection noted above, the end-to-end security layer
 of the protocol provides a few additional functions to the remainder of the
 protocol:<a href="#section-5.1-2" class="pilcrow">¶</a></p>
@@ -1908,10 +1907,9 @@ policy within that envelope.<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 room, including the various ways that members might join or leave a room (or be
 added/removed by other users).<a href="#section-5.3-3" class="pilcrow">¶</a></p>
 <p id="section-5.3-4">As discussed above, the <strong>end-to-end security control protocol</strong> manages the
-end-to-end security state of the room.  In addition to distributing messages
-that add or remove clients from the end-to-end security state, this protocol
-also allows servers to distribute cryptographic information that clients have
-pre-registered, which allows clients to be asynchronously added to rooms.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
+end-to-end security state of the room.  This protocol also allows servers to
+distribute cryptographic information that clients have pre-registered, which
+allows clients to be asynchronously added to rooms.<a href="#section-5.3-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="messages">
