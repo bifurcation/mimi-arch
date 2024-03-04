@@ -4,8 +4,8 @@
 
 More Instant Messaging Interoperability                     R. L. Barnes
 Internet-Draft                                                     Cisco
-Intended status: Informational                           23 October 2023
-Expires: 25 April 2024
+Intended status: Informational                              4 March 2024
+Expires: 5 September 2024
 
 
    An Architecture for More Instant Messaging Interoperability (MIMI)
@@ -49,11 +49,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 April 2024.
+   This Internet-Draft will expire on 5 September 2024.
 
 Copyright Notice
 
-   Copyright (c) 2023 IETF Trust and the persons identified as the
+   Copyright (c) 2024 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -75,10 +75,11 @@ Table of Contents
      4.2.  Participants and Members
      4.3.  Membership Changes
      4.4.  Policy
-   5.  Protocols
-     5.1.  Events and Transport
-     5.2.  Control Protocols
-     5.3.  Messages
+   5.  Protocol Interactions
+     5.1.  End-to-End Security
+     5.2.  Events and Transport
+     5.3.  Room State Synchronization
+     5.4.  Messages
    6.  Actors, Identifiers, and Authentication
    7.  Security Considerations
    8.  IANA Considerations
@@ -333,7 +334,7 @@ Table of Contents
    since all of the other participating clients/servers should also
    reject the event.
 
-5.  Protocols
+5.  Protocol Interactions
 
    As shown in Figure 3, MIMI protocols define server-to-server
    interactions and client-to-client interactions.  Each client
@@ -344,24 +345,34 @@ Table of Contents
    The messages sent within a room are forwarded among participating
    clients by servers.  However, messages are protected by an end-to-end
    security protocol so that their content is only accessible to the
-   clients participating in the room.  In addition to forwarding
-   messages, servers participate in control protocols that coordinate
-   the state of the room across the participating providers.  Both
-   message forwarding and control protocols leverage a common framework
-   for sharing _events_ among servers.
+   clients participating in the room.
+
+   In addition to forwarding messages, servers participate in control
+   protocols that coordinate the state of the room across the
+   participating providers.  Both message forwarding and control
+   protocols leverage a common framework for sharing _events_ among
+   servers.  Events are protected with the same end-to-end security
+   protocol as clients' messages, so that the actors updating a room are
+   authenticated and the clients participating in a room can confirm
+   that they agree on the state of the room.
 
    Note that some parts of the overall system are explicitly out of
    scope for MIMI.  Namely, client-server interactions internal to a
    provider (indicated by "(Provider)" in Figure 3) can be arranged
    however the provider likes.
 
-   A MIMI server thus participates in a few classes of protocols:
+   The MIMI protocol implemented by servers thus incorporates a few sub-
+   protocols:
 
-   *  A transport protocol
+   *  A transport protocol for sending room events among servers
 
-   *  Control protocols
+   *  A state synchronization protocol for coordinating updates to the
+      room state
 
    *  A message forwarding protocol
+
+   A common end-to-end security layer provide common security services
+   to all of these functions.
 
           Provider             Provider             Provider
              |                    |                    |
@@ -375,7 +386,7 @@ Table of Contents
      |              |             |             |              |
      |              |             |             |              |
      |  (Provider)  |          Control          |  (Provider)  |
-     |<------------>|<------------------------->|<------------>|
+     |<~~~~~~~~~~~~>|<------------------------->|<~~~~~~~~~~~~>|
      |              |             |             |              |
      |              |             |             |              |
      |              |  Transport  |  Transport  |              |
@@ -384,7 +395,39 @@ Table of Contents
 
                           Figure 3: MIMI Protocols
 
-5.1.  Events and Transport
+5.1.  End-to-End Security
+
+   As noted above, all of the clients participating in a room are part
+   of the same end-to-end security context.  This allows them to protect
+   their messages so that they are secure from inspection or tampering
+   as they transit MIMI servers.
+
+   In addition to the message protection noted above, the end-to-end
+   security layer of the protocol provides a few additional functions to
+   the remainder of the protocol:
+
+   *  Authentication of the actors making changes to a room
+
+   *  Confirmation that the clients in a room agree on the state of the
+      room
+
+   The authentication function allows MIMI servers to verify the
+   identity of a client making a change to the room, as an input to a
+   policy evaluation to check whether the change is authorized.  MIMI
+   servers can make changes to a room, within the bounds of the room's
+   authorization policy.  Thus, MIMI servers also need to be represented
+   in the end-to-end security state of the room, but as actors who can
+   only authenticate, and are not given access to confidential end-to-
+   end security state.  In MLS terms, they are added as external
+   senders, not as members of the group.
+
+   The MIMI protocol includes end-to-end security components to keep the
+   end-to-end security state of the room aligned with the room's
+   participant list, and to ensure that all clients participating in the
+   room have the proper configuration (e.g., trusting the appropriate
+   set of servers).
+
+5.2.  Events and Transport
 
    A room's activities are realized by servers exchanging _events_.
    Events come in two types:
@@ -409,31 +452,29 @@ Table of Contents
    authentication scheme, as well as the mechanics of how events are
    delivered from one server to another.
 
-5.2.  Control Protocols
+5.3.  Room State Synchronization
 
-   The servers involved in a room use control protocols to perform
-   actions related to different types of information that comprise a
-   room's state, particularly those listed in Section 4.  Because these
-   types of information and the operations they require are largely
-   orthogonal, it makes sense to have a separate control protocol for
-   each type of information.
+   The servers involved in a room use an application state
+   synchronization protocol to coordinate changes to a room's state,
+   particularly those listed in Section 4.  A few types of room state
+   are synchronized, in what can be viewed as independent control sub-
+   protocols:
 
-   The *policy control protocol* distributes information about the
-   policy envelope of a room, and allows participants in a room to
-   propose changes to the policy within that envelope.
+   A *policy control protocol* distributes information about the policy
+   envelope of a room, and allows participants in a room to propose
+   changes to the policy within that envelope.
 
-   The *participation control protocol* manages the user-level
-   membership of the room, including the various ways that members might
-   join or leave a room (or be added/removed by other users).
+   A *participation control protocol* manages the user-level membership
+   of the room, including the various ways that members might join or
+   leave a room (or be added/removed by other users).
 
-   The *end-to-end security control protocol* manages the end-to-end
-   security state of the room.  In addition to distributing messages
-   that add or remove clients from the end-to-end security state, this
-   protocol also allows servers to distribute cryptographic information
-   that clients have pre-registered, which allows clients to be
+   As discussed above, the *end-to-end security control protocol*
+   manages the end-to-end security state of the room.  This protocol
+   also allows servers to distribute cryptographic information that
+   clients have pre-registered, which allows clients to be
    asynchronously added to rooms.
 
-5.3.  Messages
+5.4.  Messages
 
    Mesage events are end-to-end secure objects that carry application
    messages in the standard MIMI content format.  The end-to-end
@@ -556,9 +597,9 @@ Table of Contents
    [I-D.ietf-mimi-content]
               Mahy, R., "More Instant Messaging Interoperability (MIMI)
               message content", Work in Progress, Internet-Draft, draft-
-              ietf-mimi-content-00, 20 June 2023,
+              ietf-mimi-content-01, 23 October 2023,
               <https://datatracker.ietf.org/doc/html/draft-ietf-mimi-
-              content-00>.
+              content-01>.
 
    [I-D.mahy-mimi-identity]
               Mahy, R., "More Instant Messaging Interoperability (MIMI)
