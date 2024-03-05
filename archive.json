@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-03-03T00:20:03.997566+00:00",
+  "timestamp": "2024-03-05T00:18:26.831428+00:00",
   "repo": "bifurcation/mimi-arch",
   "labels": [
     {
@@ -492,26 +492,157 @@
       "id": "PR_kwDOKDHiF85jhFSH",
       "title": "Populate definitions section with definitions",
       "url": "https://github.com/bifurcation/mimi-arch/pull/13",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "turt2live",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I've brought over the ralston-mimi-terminology definitions where they're used in the architecture document. Everything not already used is deliberately excluded, pending definition in a future document.\r\n\r\nMost definitions are (near-)verbatim, but some are newer. Please feel free to pick at the wording for each.",
       "createdAt": "2024-01-08T21:03:16Z",
-      "updatedAt": "2024-01-08T21:03:16Z",
+      "updatedAt": "2024-03-04T17:45:49Z",
       "baseRepository": "bifurcation/mimi-arch",
       "baseRefName": "main",
       "baseRefOid": "4f3334251d9fa84baf2cdc426be9abf6000ae631",
       "headRepository": "turt2live/ietf-fork-mimi-arch",
       "headRefName": "travis/terminology",
       "headRefOid": "8def8c46d86ac0e71df81e05650f7bf824cfdb15",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-03-04T17:45:49Z",
+      "mergedAt": "2024-03-04T17:45:49Z",
+      "mergedBy": "bifurcation",
+      "mergeCommit": {
+        "oid": "c46a905f4d93883086ef7f33eba64874c90ad169"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOKDHiF85yI4jL",
+          "commit": {
+            "abbreviatedOid": "8def8c4"
+          },
+          "author": "bifurcation",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-03-04T17:45:43Z",
+          "updatedAt": "2024-03-04T17:45:43Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOKDHiF85onPve",
+      "title": "Update to align with new concepts in mimi-protocol",
+      "url": "https://github.com/bifurcation/mimi-arch/pull/14",
+      "state": "MERGED",
+      "author": "bifurcation",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "The MIMI protocol document has evolved in a few ways that clarify things for the architecture.  This PR makes some updates to align better.",
+      "createdAt": "2024-03-04T16:39:54Z",
+      "updatedAt": "2024-03-04T17:28:07Z",
+      "baseRepository": "bifurcation/mimi-arch",
+      "baseRefName": "main",
+      "baseRefOid": "4f3334251d9fa84baf2cdc426be9abf6000ae631",
+      "headRepository": "bifurcation/mimi-arch",
+      "headRefName": "rlb-119",
+      "headRefOid": "a329cb891d6dc81504a07afb664f19cb157f9b01",
+      "closedAt": "2024-03-04T17:27:59Z",
+      "mergedAt": "2024-03-04T17:27:59Z",
+      "mergedBy": "bifurcation",
+      "mergeCommit": {
+        "oid": "ab865706d3c65bc8a80e2f5e0ec6530cc2998987"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOKDHiF85yIZxL",
+          "commit": {
+            "abbreviatedOid": "0fdfb9e"
+          },
+          "author": "rohanmahy",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "made one tiny suggestion",
+          "createdAt": "2024-03-04T16:45:09Z",
+          "updatedAt": "2024-03-04T16:45:39Z",
+          "comments": [
+            {
+              "originalPosition": 59,
+              "body": "secure from inspection for app messages but not Commits/Proposals...\r\n\r\n```suggestion\r\ntheir messages so that they are secure from inspection (of content) or tampering as they\r\n```",
+              "createdAt": "2024-03-04T16:45:09Z",
+              "updatedAt": "2024-03-04T16:45:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKDHiF85yIY2m",
+          "commit": {
+            "abbreviatedOid": "0fdfb9e"
+          },
+          "author": "kkohbrok",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "Looks good! Just two comments/questions.",
+          "createdAt": "2024-03-04T16:43:24Z",
+          "updatedAt": "2024-03-04T16:51:09Z",
+          "comments": [
+            {
+              "originalPosition": 58,
+              "body": "What is meant by \"integrity-protect\" here that's not covered by authentication and agreement mentioned below?",
+              "createdAt": "2024-03-04T16:43:24Z",
+              "updatedAt": "2024-03-04T16:51:09Z"
+            },
+            {
+              "originalPosition": 122,
+              "body": "That last sentence is a bit long. Maybe split off the last bit? Something like \"...that clients have pre-registered. That information in turn allows the asynchronous addition of clients to rooms.",
+              "createdAt": "2024-03-04T16:50:44Z",
+              "updatedAt": "2024-03-04T16:51:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKDHiF85yIdx3",
+          "commit": {
+            "abbreviatedOid": "0fdfb9e"
+          },
+          "author": "bifurcation",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-04T16:52:38Z",
+          "updatedAt": "2024-03-04T16:52:39Z",
+          "comments": [
+            {
+              "originalPosition": 59,
+              "body": "I think \"messages\" as in \"actual messages sent in the room\" cabins this appropriately.",
+              "createdAt": "2024-03-04T16:52:39Z",
+              "updatedAt": "2024-03-04T16:52:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOKDHiF85yIeD4",
+          "commit": {
+            "abbreviatedOid": "0fdfb9e"
+          },
+          "author": "bifurcation",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-03-04T16:53:09Z",
+          "updatedAt": "2024-03-04T16:53:10Z",
+          "comments": [
+            {
+              "originalPosition": 58,
+              "body": "Good point.  It's also kind of unnecessarily wordy.",
+              "createdAt": "2024-03-04T16:53:09Z",
+              "updatedAt": "2024-03-04T16:53:10Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
